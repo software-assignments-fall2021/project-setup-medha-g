@@ -22,6 +22,14 @@ With all the subscription services available these days, it can be very hard to 
 
 ## Product Vision Statement
 
+Our vision is to help people keep track of all their online subscriptions. Our target crowd is anyone who is having trouble keeping track of their online subscriptions. Our app will be able to display and calculate general statistics for the target customer's subscription. A user should be able to log in, check out every subscription they have, see monthly costs, add/delete new subscriptions, and cancel subscriptions. 
+
+## History
+
+Zach had way too much subscription service to keep track of. Therefore, he wanted to create his app to make his life a little easier. Therefore, the idea of Subtrackt is born.
+
+## Contribute
+See [CONTRIBUTING.md](./CONTRIBUTING.md)
 
 # Core Team Members
 Medha Gupta - https://github.com/medha4
