@@ -14,7 +14,8 @@ Team Norms:
 	Mondays after 6 as well
 	They will last for one hour and thirty minutes 
 
-	4.Coding standards: Designate a code editor and code linter all team members will use to standardize code formatting.
+	4.Coding standards: 
+	Designate a code editor and code linter all team members will use to standardize code formatting.
 	Don't over-engineer. Write minimum code to get things working end to end, only then iterate to improve. - Code for each task and spike must be peer-reviewed and pass tests before merging into the main branch of code.
 	Always push working code, if you break the pipeline/build then fix it.
 Make granular and small commits, per feature or per bug fix.
@@ -25,6 +26,8 @@ Make granular and small commits, per feature or per bug fix.
 	
 Git Workflow:
 	
+	Mergre branches in github, not on your own
+
 	When working on shared files, create a seperate branch, and when 
 	working on stand-alone files edit directly (README)
 
