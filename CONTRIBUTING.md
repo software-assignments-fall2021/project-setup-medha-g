@@ -44,3 +44,11 @@ Rules of Contribution:
 
 Instructions for Local Development Environment:
 
+	Download React
+	Set up Node.js
+	Download the latest version of python
+	Download/update any other dependencies necessary
+
+Instructions for building and testing the project 
+	TBD (project has not yet reached that stage)
+
