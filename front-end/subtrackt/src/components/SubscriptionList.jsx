@@ -67,7 +67,8 @@ const SubscriptionList = () => {
      * {
      *  index: index of the subscription,
      *  image: logo image link,
-     *  descripion: description of the subscription,
+     *  title: title/name of the subscription,
+     *  description: description of the subscription,
      *  plan: price plan
      * }
      */
