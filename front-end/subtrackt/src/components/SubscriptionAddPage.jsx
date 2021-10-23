@@ -74,6 +74,15 @@ const SubscriptionAddPage = (props) => {
         console.log(`Time Unit changed to: ${event.target.value}`);
         setTimeUnit(event.target.value);
     };
+    const handleSubmit = () => {
+        console.log("Submit form");
+        props.handleSubmit({
+            image: image,
+            title: subscriptionTitle,
+            description: description,
+            plan: plan
+        });
+    }
 
     return (
         <form>
@@ -122,6 +131,7 @@ const SubscriptionAddPage = (props) => {
                     <option value="year">year</option>
                 </select>
             </div>
+            <button type="submit" class="btn btn-primary" onClick={handleSubmit}>Submit</button>
         </form>
     );
 };
