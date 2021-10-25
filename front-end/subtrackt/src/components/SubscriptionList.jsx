@@ -113,3 +113,5 @@ const SubscriptionList = () => {
         </div>
     )
 }
+
+export default SubscriptionList;
