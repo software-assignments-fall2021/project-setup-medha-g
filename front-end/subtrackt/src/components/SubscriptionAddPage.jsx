@@ -135,3 +135,5 @@ const SubscriptionAddPage = (props) => {
         </form>
     );
 };
+
+export default SubscriptionAddPage;
