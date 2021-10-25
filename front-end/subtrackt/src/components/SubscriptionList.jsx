@@ -1,6 +1,9 @@
 import React, { useState } from 'react';
 
+import 'bootstrap/dist/css/min.css';
+
 /* Test variable and functions ===================================================================================
+>>>>>>> bc7d8b32ffad0198f07cd5d1719f5a6a99004ade
 
 var startList = [{
     index: 0,
@@ -20,6 +23,7 @@ var startList = [{
     description: "desc2",
     plan: "plan2"
 }]
+
 */
 
 function generateRandomSub() {
@@ -37,7 +41,8 @@ function generateRandomSub() {
  * Hook function for sublist
  */
 function useSubList(initList) {
-    const [sublist, setSublist] = useState([]);
+    const [sublist, setSublist] = useState(initList);
+
 
     const addSublist = sub => {
         setSublist(prev => {
