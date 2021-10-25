@@ -71,7 +71,7 @@ const SubscriptionList = () => {
     /**
      * Array to keep track of subscriptions, subscription object should have the following property:
      * {
-     *  index: index of the subscription,
+     *  index: index of the subscription, //index is the key of the following elements
      *  image: logo image link,
      *  title: title/name of the subscription,
      *  description: description of the subscription,
