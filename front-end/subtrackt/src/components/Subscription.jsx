@@ -1,32 +1,33 @@
-import React, { useState } from 'react';
-import {DeleteButton} from './DeleteButton';
+import React from 'react';
 
 
-function Subscription(props){
-	      // Handlers ==================================================================================================
+function Subscription(props) {
+	// Handlers ==================================================================================================
 
-		handleClick = (event) => {
-    		deleteSublist({index})
-    	}
+	const handleClick = (event) => {
+		props.deleteSublist(props.index)
+	}
+
 	return (
-		<div class="row">
-  			<div class="column">
-  				<h4>props[index].title</h4>
-  				<img src={props[index].image} alt="Logo"></img>
-  			</div>
-  			<div class="column">
-  				<h4>Description</h4>
-  				<p>{props[index].description}</p>
-  			</div>
-  			<div class="column">
-  				<h4>Plan Details</h4>
-  				<p>Price: {props[index].plan.price} for {props[index].plan.time_quantity} {props[index].plan.time_unit}</p>
-  			</div>
-			  <div class="column">
-			  <button type="button" onClick={handleClick}>Delete</button>
-  			</div>
-	</div>
+		<div className="row">
+			<div className="column">
+				<h4>{props.title}</h4>
+				<img src={props.image} alt="Logo"></img>
+			</div>
+			<div className="column">
+				<h4>Description</h4>
+				<p>{props.description}</p>
+			</div>
+			<div className="column">
+				<h4>Plan Details</h4>
+				<p>Price: {props.plan.price} for {props.plan.time_quantity} {props.plan.time_unit}</p>
+			</div>
+			<div className="column">
+				<button type="button" onClick={handleClick}>Delete</button>
+			</div>
+		</div>
 	);
 
 }
 
+export default Subscription;
