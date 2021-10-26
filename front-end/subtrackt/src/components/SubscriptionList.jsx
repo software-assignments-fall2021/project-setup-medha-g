@@ -1,9 +1,8 @@
 import React, { useState } from 'react';
-
+import Subscription from './Subscription';
 import 'bootstrap/dist/css/min.css';
 
 /* Test variable and functions ===================================================================================
->>>>>>> bc7d8b32ffad0198f07cd5d1719f5a6a99004ade
 
 var startList = [{
     index: 0,
@@ -31,7 +30,11 @@ function generateRandomSub() {
         index: 0,
         image: (Math.random() + 1).toString(36).substring(7),
         description: (Math.random() + 1).toString(36).substring(7),
-        plan: (Math.random() + 1).toString(36).substring(7)
+        plan: {
+            price: (Math.random() + 1).toString(36).substring(7),
+            time_quantity: 3,
+            time_unit: "month"
+        }
     }
 }
 
@@ -78,7 +81,7 @@ const SubscriptionList = () => {
      *  plan: price plan
      * }
      */
-    const [sublist, addList, deleteList] = useSubList(startList);
+    const [sublist, addList, deleteList] = useSubList([]);
 
     // Handlers ==================================================================================================
 
@@ -97,9 +100,7 @@ const SubscriptionList = () => {
          * Content of this function is temporary until Subscription component is completed
          */
         return sublist.map((item) => <li key={item.index}>
-            Image: {item.image},
-            Description: {item.description},
-            Plan: {item.plan}
+            <Subscription index={item.index} image={item.image} title={item.title} description={item.description} plan={item.plan} deleteSublist={handleDeleteSub}/>
         </li>);
     }
 
