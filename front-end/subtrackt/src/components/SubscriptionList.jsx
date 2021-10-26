@@ -29,6 +29,7 @@ function generateRandomSub() {
     return {
         index: 0,
         image: (Math.random() + 1).toString(36).substring(7),
+        title: (Math.random() + 1).toString(36).substring(7),
         description: (Math.random() + 1).toString(36).substring(7),
         plan: {
             price: (Math.random() + 1).toString(36).substring(7),
@@ -56,11 +57,13 @@ function useSubList(initList) {
     const deleteSublist = index => {
         setSublist(prev => {
             // create new array
-            let newSubs = prev.splice(index, 1);
+            var newarr = [...prev];
+            newarr.splice(index, 1);
             //update index
-            return newSubs.map((value, index) => ({
+            return newarr.map((value, index) => ({
                 index: index,
                 image: value.image,
+                title: value.title,
                 description: value.description,
                 plan: value.plan,
             }))
