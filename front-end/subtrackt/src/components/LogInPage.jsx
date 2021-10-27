@@ -1,20 +1,29 @@
 import React, { useState } from "react";
+import { Redirect } from "react-router-dom";
 
+const setUsername = (uname) => {
+    this.state.username = uname;
+};
+const setPassword = (pswd) => {
+    this.state.password = pswd;
+};
 
 const LogInPage = (props) => {
-    const [username] = useState("");
-    const [password] = useState("");
+    const [username, setUsername] = useState("");
+    const [password, setPassword] = useState("");
 
     // Handlers ==================================================================================================
     const handleUsername= (event) => {
         console.log(`Username changed to: ${event.target.value}`);
-        setTitle(event.target.value);
+        setUsername(event.target.value);
     };
     const handlePassword = (event) => {
         console.log(`Password set to: ${event.target.value}`);
-        setDescription(event.target.value);
+        setPassword(event.target.value);
     };
-    const handleSubmit = () => {
+    const handleSubmit = async e => {
+        // prevent the HTML form from actually submitting 
+        e.preventDefault()
         console.log("Submit form");
         props.handleSubmit({
             username: currUsername,
@@ -22,7 +31,8 @@ const LogInPage = (props) => {
         });
     }
 
-    return (
+    if (username==""){ return(
+        <div className="Login">
         <form>
             <label>Log In:</label>
             <div className="mb-3">
@@ -46,8 +56,11 @@ const LogInPage = (props) => {
             </div>
             <br />
             <button type="submit" class="btn btn-primary" onClick={handleSubmit}>Submit</button>
-        </form>
-    );
+        </form></div>
+    
+        );
+    }
+    else return <Redirect to="/" />
 };
 
 export default LogInPage;
