@@ -118,9 +118,9 @@ const SubscriptionList = () => {
         <div className="SubscriptionBox">
             <button onClick={handleSeePage}>+</button>
             {seePage ? <SubcriptionAddPage handleSubmit={handleAddSub} handleBack={handleUnseePage}/> : null}
-            <ul className="SubscriptionList">
+            <ol className="SubscriptionList">
                 {renderList()}
-            </ul>
+            </ol>
         </div>
     )
 }
