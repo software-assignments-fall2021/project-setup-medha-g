@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import Subscription from './Subscription';
-import 'bootstrap/dist/css/min.css';
+import SubcriptionAddPage from './SubscriptionAddPage';
 
 /* Test variable and functions ===================================================================================
 
@@ -47,7 +47,6 @@ function generateRandomSub() {
 function useSubList(initList) {
     const [sublist, setSublist] = useState(initList);
 
-
     const addSublist = sub => {
         setSublist(prev => {
             sub.index = prev.length;
@@ -85,6 +84,7 @@ const SubscriptionList = () => {
      * }
      */
     const [sublist, addList, deleteList] = useSubList([]);
+    const [seePage, toggleSeePage] = useState(false); 
 
     // Handlers ==================================================================================================
 
@@ -94,6 +94,12 @@ const SubscriptionList = () => {
     }
     const handleDeleteSub = index => {
         deleteList(index);
+    }
+    const handleSeePage = () => {
+        toggleSeePage(true);
+    }
+    const handleUnseePage = () => {
+        toggleSeePage(false);
     }
 
     // Handlers END ===============================================================================================
@@ -110,10 +116,11 @@ const SubscriptionList = () => {
     // Still need to add proper add button
     return (
         <div className="SubscriptionBox">
-            <button onClick={handleAddSub}>+</button>
-            <ul className="SubscriptionList">
+            <button onClick={handleSeePage}>+</button>
+            {seePage ? <SubcriptionAddPage handleSubmit={handleAddSub} handleBack={handleUnseePage}/> : null}
+            <ol className="SubscriptionList">
                 {renderList()}
-            </ul>
+            </ol>
         </div>
     )
 }
