@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import 'bootstrap/dist/css/min.css';
 
 function usePlan() {
     const [plan, setPlan] = useState({
@@ -35,6 +36,8 @@ function usePlan() {
 }
 
 const SubscriptionAddPage = (props) => {
+    
+
     const [image, setImage] = useState("");
     const [subscriptionTitle, setTitle] = useState("");
     const [description, setDescription] = useState("");
@@ -131,7 +134,10 @@ const SubscriptionAddPage = (props) => {
                     <option value="year">year</option>
                 </select>
             </div>
-            <button type="submit" class="btn btn-primary" onClick={handleSubmit}>Submit</button>
+            <div>
+            <button type="submit" className="btn btn-primary" onClick={handleSubmit}>Submit</button>
+            <button className="btn btn-primary" onClick={props.handleBack}>Go Back</button>
+            </div>
         </form>
     );
 };
