@@ -1,16 +1,19 @@
-import React, { useEffect } from "react"
-import { Redirect } from "react-router-dom"
+import React from "react"
+import { useHistory } from "react-router-dom"
+import {useAuth} from './use-auth'
 
 
-const LogoutPage = props => {
-  // log the user out by setting the username to an empty string
-  // we assume that a setUsername function has been passed as a prop to this component
-  useEffect(() => {
-    props.setUsername("") 
-  }, [])
+const LogoutPage = () => {
+  let history = useHistory();
+  let auth = useAuth();
 
-  // send the user to the home screen
-  return <Redirect to="/" />
+  return auth.user ? (
+    <button onClick={() => {
+      auth.signout(() => history.push('/'));
+    }}>
+      Logout
+    </button>
+  ) : null;
 }
 
 export default LogoutPage
