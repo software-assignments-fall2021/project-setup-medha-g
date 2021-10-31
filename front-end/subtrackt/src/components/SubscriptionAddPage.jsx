@@ -79,8 +79,9 @@ const SubscriptionAddPage = (props) => {
     };
     const handleSubmit = () => {
         console.log("Submit form");
+        setTitle(prev => prev.trim().toUpperCase());
         props.handleSubmit({
-            image: image,
+            image: `//logo.clearbit.com/${subscriptionTitle}.com`,
             title: subscriptionTitle,
             description: description,
             plan: plan
