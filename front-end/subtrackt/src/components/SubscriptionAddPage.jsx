@@ -1,5 +1,7 @@
 import React, { useState} from "react";
 // import 'bootstrap/dist/css/min.css';
+// import {REACT_APP_CLEARBIT_API_KEY} from "../../process.env"
+// import deleteImage from '../images/delete_icon.png';
 
 function usePlan() {
     const [plan, setPlan] = useState({
@@ -38,7 +40,7 @@ function usePlan() {
 const SubscriptionAddPage = (props) => {
     
     
-    const [image, setImage] = useState("");
+    const [image, setImage] = useState(""); // can remove these variables
     const [subscriptionTitle, setTitle] = useState("");
     const [description, setDescription] = useState("");
 
@@ -85,11 +87,16 @@ const SubscriptionAddPage = (props) => {
 
         var givenDomain = document.getElementById("subscriptionURLInputID").value
         console.log(givenDomain)
-        setDescription("Fake");
-        setTitle("Fake");
-        setImage("Fake");
-        console.log("this is the updated title: ", subscriptionTitle)
-        var clearbit = require('clearbit')('sk_c73c308d95520576dc23e68b02ff6a81');
+        // setDescription("Fake");
+        // setTitle("Fake");
+        // setImage("Fake");
+        // console.log("this is the updated title: ", subscriptionTitle)
+
+        const  {REACT_APP_CLEARBIT_API_KEY} = process.env
+        console.log(REACT_APP_CLEARBIT_API_KEY)
+        var clearbit = require('clearbit')(REACT_APP_CLEARBIT_API_KEY);
+        console.log(clearbit)
+        // var clearbit = require('clearbit')('sk_c73c308d95520576dc23e68b02ff6a81');
         clearbit.Company.find({domain: givenDomain, stream: true})
         .then(function (company) {
             console.log('Description: ', company.description);
@@ -104,7 +111,16 @@ const SubscriptionAddPage = (props) => {
                 plan: plan
     
                 
-            });
+            })
+            // .catch((error) => {
+            //     console.log(error)
+            //     props.handleSubmit({
+            //         image: {deleteImage},
+            //         title: givenDomain,
+            //         description: givenDomain,
+            //         plan: plan
+            //     })
+            //   });
         });
         // setTitle(prev => prev.trim().toUpperCase());
         

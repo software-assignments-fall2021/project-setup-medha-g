@@ -8,6 +8,8 @@ import LogInPage from "./LogInPage";
 import { ProvideAuth } from "./use-auth";
 import PrivateRoute from "./PrivateRoute";
 
+console.log("api key: ", process.env.REACT_APP_CLEARBIT_API_KEY)
+
 function App() {
   return (
     <ProvideAuth>
