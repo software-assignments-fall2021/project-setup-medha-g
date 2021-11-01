@@ -20,3 +20,8 @@ code {
 .custom-button{
   display: inline-block;
 }
+
+.custom-delete{
+  width:50px;
+  height:60px;
+}

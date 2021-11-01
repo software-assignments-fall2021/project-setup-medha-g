@@ -85,24 +85,35 @@ const SubscriptionAddPage = (props) => {
 
         var givenDomain = document.getElementById("subscriptionURLInputID").value
         console.log(givenDomain)
+        setDescription("Fake");
+        setTitle("Fake");
+        setImage("Fake");
+        console.log("this is the updated title: ", subscriptionTitle)
         var clearbit = require('clearbit')('sk_c73c308d95520576dc23e68b02ff6a81');
         clearbit.Company.find({domain: givenDomain, stream: true})
         .then(function (company) {
             console.log('Description: ', company.description);
             console.log('Name: ', company.name);
-            setDescription(company.description);
-            setTitle(company.name);
-            setImage(company.logo);
+            // setDescription(company.description);
+            // setTitle(company.name);
+            // setImage(company.logo);
+            props.handleSubmit({
+                image: company.logo,
+                title: company.name,
+                description: company.description,
+                plan: plan
+    
+                
+            });
         });
-
-
         // setTitle(prev => prev.trim().toUpperCase());
-        props.handleSubmit({
-            image: image,
-            title: subscriptionTitle,
-            description: description,
-            plan: plan
-        });
+        
+        // props.handleSubmit({
+        //     image: image,
+        //     title: "fake",
+        //     description: description,
+        //     plan: plan
+        // });
         props.handleBack();
     }
 

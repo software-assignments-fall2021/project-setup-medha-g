@@ -1,4 +1,5 @@
 import React from 'react';
+import deleteImage from '../images/delete_icon.png';
 
 
 function Subscription(props) {
@@ -23,8 +24,9 @@ function Subscription(props) {
 				<p>Price: {props.plan.price} for {props.plan.time_quantity} {props.plan.time_unit}</p>
 			</div>
 			<div className="col-md-3 col-sm-6 col-xs-12 bootCols">
-				{/* <button type="button" onClick={handleClick}>Delete</button> */}
-				<input type="image" src="../images/delete_icon.png" onClick={handleClick} alt="Delete"/> 
+				{/* <button type="button" onClick={handleClick}><img src ="../images/delete_icon.png" alt = "Delete"> </img>Delete</button> */}
+				{/* <input type="image" size = "10" src = {deleteImage} onClick={handleClick} alt="Delete"/>  */}
+				<img src  = {deleteImage} onClick={handleClick} alt="Delete" className="custom-delete"/>
 			</div>
 		</div>
 	);
