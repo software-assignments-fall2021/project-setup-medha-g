@@ -9,7 +9,7 @@ const GraphGatherer = (props) => {
   const [monthlySpending, setMonthlySpending] = useState(
     totalPricesLastSixMonths
   );
-  const [subcritionPriceMapping, setSubscriptionPriceMapping] = useState(
+  const [subcriptionPriceMapping, setSubscriptionPriceMapping] = useState(
     subcriptionPriceMapping
   );
 
@@ -19,7 +19,7 @@ const GraphGatherer = (props) => {
         <BarChart data={monthlySpending} />
       </div>
       <div className="LastMonthPieChart">
-        <PieGraph data={subcritionPriceMapping} />
+        <PieGraph data={subcriptionPriceMapping} />
       </div>
     </div>
   );
