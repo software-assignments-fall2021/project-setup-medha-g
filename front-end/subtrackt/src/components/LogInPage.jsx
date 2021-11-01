@@ -29,7 +29,7 @@ const LogInPage = (props) => {
 
     return (
         <div className="Login">
-            <form>
+            <form className="custom-form">
                 <label>Log In:</label>
                 <div className="mb-3">
                     <input

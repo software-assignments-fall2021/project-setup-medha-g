@@ -37,7 +37,6 @@ function usePlan() {
 
 const SubscriptionAddPage = (props) => {
     
-
     const [image, setImage] = useState("");
     const [subscriptionTitle, setTitle] = useState("");
     const [description, setDescription] = useState("");
@@ -90,7 +89,7 @@ const SubscriptionAddPage = (props) => {
     }
 
     return (
-        <div>
+        <div className="custom-form ">
             <label>Subscription Title:</label>
             <div className="mb-3">
                 <input
