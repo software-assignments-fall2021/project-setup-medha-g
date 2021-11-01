@@ -23,7 +23,8 @@ function Subscription(props) {
 				<p>Price: {props.plan.price} for {props.plan.time_quantity} {props.plan.time_unit}</p>
 			</div>
 			<div className="column col-xs-6 col-md-3">
-				<button type="button" onClick={handleClick}>Delete</button>
+				{/* <button type="button" onClick={handleClick}>Delete</button> */}
+				<input type="image" src="../images/delete_icon.png" onClick={handleClick} alt="Delete"/> 
 			</div>
 		</div>
 	);
