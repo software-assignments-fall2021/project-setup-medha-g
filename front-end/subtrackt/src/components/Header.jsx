@@ -5,14 +5,14 @@ import LogoutPage from './LogOutPage';
 const Header = () => {
     return (
         <div className="header">
-             <nav class="navbar navbar-light bg-light">
-                <a class="navbar-brand" href="/landing">
+             <nav className="navbar navbar-light bg-light">
+                <a className="navbar-brand" href="/landing">
                     SubTrackt
                 </a>
-                <a class="navbar-brand" href="/sub_list">
+                <a className="navbar-brand" href="/sub_list">
                     Subscriptions
                 </a>
-                <a class="navbar-brand" href="./LogOutPage">
+                <a className="navbar-brand" href="./LogOutPage">
                 <LogoutPage/>
                 </a>
                 </nav>
