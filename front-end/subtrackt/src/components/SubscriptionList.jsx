@@ -97,10 +97,17 @@ const SubscriptionList = () => {
     }
     const handleSeePage = () => {
         toggleSeePage(true);
+        var currAddButton = document.getElementById("addButton");
+        currAddButton.style.display = "none";
+        
+        
     }
     const handleUnseePage = () => {
         toggleSeePage(false);
+        var currAddButton = document.getElementById("addButton");
+        currAddButton.style.display = "block";
     }
+    
 
     // Handlers END ===============================================================================================
 
@@ -116,7 +123,8 @@ const SubscriptionList = () => {
     // Still need to add proper add button
     return (
         <div className="SubscriptionBox">
-            <button onClick={handleSeePage}>+</button>
+            <h3>Your Subscriptions</h3>
+            <button className= "btn btn-primary custom-button" onClick={handleSeePage} id="addButton">+</button>
             {seePage ? <SubcriptionAddPage handleSubmit={handleAddSub} handleBack={handleUnseePage}/> : null}
             <ol className="SubscriptionList">
                 {renderList()}
@@ -124,5 +132,7 @@ const SubscriptionList = () => {
         </div>
     )
 }
+
+
 
 export default SubscriptionList;

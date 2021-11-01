@@ -4,7 +4,7 @@ const LandingPage = () => {
     return (
         <div className="landing">
             <div>
-                Info about the app.
+                SubTrackt is a subscription tracking and budgeting application.
             </div>
         </div>
     )

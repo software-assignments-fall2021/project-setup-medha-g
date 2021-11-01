@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState} from "react";
 // import 'bootstrap/dist/css/min.css';
 
 function usePlan() {
@@ -37,7 +37,7 @@ function usePlan() {
 
 const SubscriptionAddPage = (props) => {
     
-
+    
     const [image, setImage] = useState("");
     const [subscriptionTitle, setTitle] = useState("");
     const [description, setDescription] = useState("");
@@ -57,13 +57,16 @@ const SubscriptionAddPage = (props) => {
     const handleImage = () => {
         // TODO: Use subscription title to find image logo
     };
-    const handleTitle = (event) => {
-        console.log(`Title changed to: ${event.target.value}`);
-        setTitle(event.target.value);
-    };
-    const handleDescription = (event) => {
-        console.log(`Description changed to: ${event.target.value}`);
+    // const handleTitle = (event) => {
+    //     console.log(`Title changed to: ${event.target.value}`);
+    //     var givenDomain = event.target.value;
+
+    //     // setTitle(givenDomain)
+
+    // };
+    const handleDescription = (event) => {  
         setDescription(event.target.value);
+        
     };
     const handlePrice = (event) => {
         console.log(`Price changed to: ${event.target.value}`);
@@ -79,29 +82,55 @@ const SubscriptionAddPage = (props) => {
     };
     const handleSubmit = () => {
         console.log("Submit form");
-        setTitle(prev => prev.trim().toUpperCase());
-        props.handleSubmit({
-            image: `//logo.clearbit.com/${subscriptionTitle}.com`,
-            title: subscriptionTitle,
-            description: description,
-            plan: plan
+
+        var givenDomain = document.getElementById("subscriptionURLInputID").value
+        console.log(givenDomain)
+        setDescription("Fake");
+        setTitle("Fake");
+        setImage("Fake");
+        console.log("this is the updated title: ", subscriptionTitle)
+        var clearbit = require('clearbit')('sk_c73c308d95520576dc23e68b02ff6a81');
+        clearbit.Company.find({domain: givenDomain, stream: true})
+        .then(function (company) {
+            console.log('Description: ', company.description);
+            console.log('Name: ', company.name);
+            // setDescription(company.description);
+            // setTitle(company.name);
+            // setImage(company.logo);
+            props.handleSubmit({
+                image: company.logo,
+                title: company.name,
+                description: company.description,
+                plan: plan
+    
+                
+            });
         });
+        // setTitle(prev => prev.trim().toUpperCase());
+        
+        // props.handleSubmit({
+        //     image: image,
+        //     title: "fake",
+        //     description: description,
+        //     plan: plan
+        // });
         props.handleBack();
     }
 
     return (
-        <div>
-            <label>Subscription Title:</label>
+        <div className="custom-form ">
+            <label>Subscription URL:</label>
             <div className="mb-3">
                 <input
                     type="text"
                     className="form-control"
-                    value={subscriptionTitle}
-                    onChange={handleTitle}
+                    defaultValue={subscriptionTitle}
+                    // onChange={handleTitle}
                     placeholder="Subsciption"
+                    id = "subscriptionURLInputID"
                 />
             </div>
-            <br />
+            {/* <br />
             <label>Subscription Description:</label>
             <div className="mb-3">
                 <input
@@ -111,7 +140,7 @@ const SubscriptionAddPage = (props) => {
                     onChange={handleDescription}
                     placeholder="Subscription Description"
                 />
-            </div>
+            </div> */}
             <br />
             <label>Subscription plan:</label>
             <div className="input-group mb-3">
@@ -130,7 +159,7 @@ const SubscriptionAddPage = (props) => {
                     onChange={handleTimeQuantity}
                 />
                 <select className="form-select" onChange={handleTimeUnit}>
-                    <option selected>Select timeunit</option>
+                    <option defaultValue>Select timeunit</option>
                     <option value="day">day</option>
                     <option value="month">month</option>
                     <option value="year">year</option>

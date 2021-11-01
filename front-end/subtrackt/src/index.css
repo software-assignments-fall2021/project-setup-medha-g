@@ -11,3 +11,17 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+
+.custom-form {
+  width: 50% !important;
+  display: inline-block !important;
+}
+
+.custom-button{
+  display: inline-block;
+}
+
+.custom-delete{
+  width:50px;
+  height:60px;
+}
