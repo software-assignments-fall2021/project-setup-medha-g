@@ -10,6 +10,7 @@ mongoose.promise = global.Promise;
 
 const isProduction = process.env.NODE_ENV === "production";
 const DB_ADDR = process.env.DB_ADDR;
+const SESSION_SECRET = process.env.SESSION_SECRET;
 
 const app = express();
 
@@ -21,7 +22,7 @@ app.use(express.json());
 app.use(express.static(path.join(__dirname, "public")));
 app.use(
 	session({
-		secret: "passport-tutorial",
+		secret: "SESSION_SECRET",
 		cookie: { maxAge: 60000 },
 		resave: false,
 		saveUninitialized: false,
