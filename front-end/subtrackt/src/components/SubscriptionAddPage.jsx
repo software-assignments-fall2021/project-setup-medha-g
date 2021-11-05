@@ -2,6 +2,7 @@ import React, { useState} from "react";
 // import 'bootstrap/dist/css/min.css';
 import placeholderImage from '../images/placeholder_icon.png';
 
+
 function usePlan() {
     const [plan, setPlan] = useState({
         price: 0.0,
@@ -37,8 +38,8 @@ function usePlan() {
 }
 
 const SubscriptionAddPage = (props) => {
-    
-    
+
+   
     const [subscriptionTitle, setTitle] = useState("");
 
     /**
@@ -110,7 +111,7 @@ const SubscriptionAddPage = (props) => {
                     className="form-control"
                     defaultValue={subscriptionTitle}
                     placeholder="Subsciption"
-                    id = "subscriptionURLInputID"
+                    id="subscriptionURLInputID"
                 />
             </div>
             <br />
@@ -138,8 +139,8 @@ const SubscriptionAddPage = (props) => {
                 </select>
             </div>
             <div>
-            <button className="btn btn-primary" onClick={handleSubmit}>Submit</button>
-            <button className="btn btn-primary" onClick={props.handleBack}>Go Back</button>
+                <button className="btn btn-primary" onClick={handleSubmit}>Submit</button>
+                <button className="btn btn-primary" onClick={props.handleBack}>Go Back</button>
             </div>
         </div>
     );

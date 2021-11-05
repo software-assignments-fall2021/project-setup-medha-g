@@ -1,6 +1,6 @@
 import React from "react"
 import { useHistory } from "react-router-dom"
-import {useAuth} from './use-auth'
+import { useAuth } from './use-auth'
 
 
 const LogoutPage = () => {
