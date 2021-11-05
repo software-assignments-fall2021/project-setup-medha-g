@@ -1,6 +1,6 @@
 import React, { useState} from "react";
 // import 'bootstrap/dist/css/min.css';
-import deleteImage from '../images/delete_icon.png';
+import placeholderImage from '../images/placeholder_icon.png';
 
 function usePlan() {
     const [plan, setPlan] = useState({
@@ -39,9 +39,7 @@ function usePlan() {
 const SubscriptionAddPage = (props) => {
     
     
-    const [image, setImage] = useState(""); // can remove these variables
     const [subscriptionTitle, setTitle] = useState("");
-    const [description, setDescription] = useState("");
 
     /**
      * plan state variable should follow this format
@@ -55,20 +53,6 @@ const SubscriptionAddPage = (props) => {
 
     // Handlers ==================================================================================================
 
-    const handleImage = () => {
-        // TODO: Use subscription title to find image logo
-    };
-    // const handleTitle = (event) => {
-    //     console.log(`Title changed to: ${event.target.value}`);
-    //     var givenDomain = event.target.value;
-
-    //     // setTitle(givenDomain)
-
-    // };
-    const handleDescription = (event) => {  
-        setDescription(event.target.value);
-        
-    };
     const handlePrice = (event) => {
         console.log(`Price changed to: ${event.target.value}`);
         setPrice(event.target.value);
@@ -87,18 +71,13 @@ const SubscriptionAddPage = (props) => {
         var givenDomain = document.getElementById("subscriptionURLInputID").value
         console.log(givenDomain)
 
-        const  {REACT_APP_CLEARBIT_API_KEY} = process.env
-        // console.log(REACT_APP_CLEARBIT_API_KEY)
-        var clearbit = require('clearbit')(REACT_APP_CLEARBIT_API_KEY);
-        // console.log(clearbit)
-        // var clearbit = require('clearbit')('sk_c73c308d95520576dc23e68b02ff6a81');
+        const  {REACT_APP_CLEARBIT_API_KEY} = process.env //retrieves api key from .env
+        var clearbit = require('clearbit')(REACT_APP_CLEARBIT_API_KEY); //creates api call 
         clearbit.Company.find({domain: givenDomain, stream: true})
         .then(function (company) {
             console.log('Description: ', company.description);
             console.log('Name: ', company.name);
-            // setDescription(company.description);
-            // setTitle(company.name);
-            // setImage(company.logo);
+        
             props.handleSubmit({
                 image: company.logo,
                 title: company.name,
@@ -107,17 +86,17 @@ const SubscriptionAddPage = (props) => {
     
                 
             })
-            // .catch((error) => { //TODO: need to add error handler for invalid urls
-            //     console.log(error)
-            //     props.handleSubmit({
-            //         image: {placeholderImage}, //TODO: find and add placeholder image
-            //         title: givenDomain,
-            //         description: givenDomain,
-            //         plan: plan
-            //     })
-            //   });
-        });
-        // setTitle(prev => prev.trim().toUpperCase());
+            
+        })
+        .catch((error) => { 
+            console.log(error)
+            props.handleSubmit({
+                image: placeholderImage, 
+                title: givenDomain,
+                description: givenDomain,
+                plan: plan
+            })
+          });
         
         props.handleBack();
     }
@@ -130,22 +109,10 @@ const SubscriptionAddPage = (props) => {
                     type="text"
                     className="form-control"
                     defaultValue={subscriptionTitle}
-                    // onChange={handleTitle}
                     placeholder="Subsciption"
                     id = "subscriptionURLInputID"
                 />
             </div>
-            {/* <br />
-            <label>Subscription Description:</label>
-            <div className="mb-3">
-                <input
-                    type="text"
-                    className="form-control"
-                    value={description}
-                    onChange={handleDescription}
-                    placeholder="Subscription Description"
-                />
-            </div> */}
             <br />
             <label>Subscription plan:</label>
             <div className="input-group mb-3">
