@@ -1,5 +1,4 @@
-import React, { useState} from "react";
-// import 'bootstrap/dist/css/min.css';
+import React, { useState } from "react";
 import deleteImage from '../images/delete_icon.png';
 
 function usePlan() {
@@ -37,8 +36,8 @@ function usePlan() {
 }
 
 const SubscriptionAddPage = (props) => {
-    
-    
+
+
     const [image, setImage] = useState(""); // can remove these variables
     const [subscriptionTitle, setTitle] = useState("");
     const [description, setDescription] = useState("");
@@ -65,9 +64,9 @@ const SubscriptionAddPage = (props) => {
     //     // setTitle(givenDomain)
 
     // };
-    const handleDescription = (event) => {  
+    const handleDescription = (event) => {
         setDescription(event.target.value);
-        
+
     };
     const handlePrice = (event) => {
         console.log(`Price changed to: ${event.target.value}`);
@@ -87,38 +86,38 @@ const SubscriptionAddPage = (props) => {
         var givenDomain = document.getElementById("subscriptionURLInputID").value
         console.log(givenDomain)
 
-        const  {REACT_APP_CLEARBIT_API_KEY} = process.env
+        const { REACT_APP_CLEARBIT_API_KEY } = process.env
         // console.log(REACT_APP_CLEARBIT_API_KEY)
         var clearbit = require('clearbit')(REACT_APP_CLEARBIT_API_KEY);
         // console.log(clearbit)
         // var clearbit = require('clearbit')('sk_c73c308d95520576dc23e68b02ff6a81');
-        clearbit.Company.find({domain: givenDomain, stream: true})
-        .then(function (company) {
-            console.log('Description: ', company.description);
-            console.log('Name: ', company.name);
-            // setDescription(company.description);
-            // setTitle(company.name);
-            // setImage(company.logo);
-            props.handleSubmit({
-                image: company.logo,
-                title: company.name,
-                description: company.description,
-                plan: plan
-    
-                
-            })
-            // .catch((error) => { //TODO: need to add error handler for invalid urls
-            //     console.log(error)
-            //     props.handleSubmit({
-            //         image: {placeholderImage}, //TODO: find and add placeholder image
-            //         title: givenDomain,
-            //         description: givenDomain,
-            //         plan: plan
-            //     })
-            //   });
-        });
+        clearbit.Company.find({ domain: givenDomain, stream: true })
+            .then(function (company) {
+                console.log('Description: ', company.description);
+                console.log('Name: ', company.name);
+                // setDescription(company.description);
+                // setTitle(company.name);
+                // setImage(company.logo);
+                props.handleSubmit({
+                    image: company.logo,
+                    title: company.name,
+                    description: company.description,
+                    plan: plan
+
+
+                })
+                // .catch((error) => { //TODO: need to add error handler for invalid urls
+                //     console.log(error)
+                //     props.handleSubmit({
+                //         image: {placeholderImage}, //TODO: find and add placeholder image
+                //         title: givenDomain,
+                //         description: givenDomain,
+                //         plan: plan
+                //     })
+                //   });
+            });
         // setTitle(prev => prev.trim().toUpperCase());
-        
+
         props.handleBack();
     }
 
@@ -132,7 +131,7 @@ const SubscriptionAddPage = (props) => {
                     defaultValue={subscriptionTitle}
                     // onChange={handleTitle}
                     placeholder="Subsciption"
-                    id = "subscriptionURLInputID"
+                    id="subscriptionURLInputID"
                 />
             </div>
             {/* <br />
@@ -171,8 +170,8 @@ const SubscriptionAddPage = (props) => {
                 </select>
             </div>
             <div>
-            <button className="btn btn-primary" onClick={handleSubmit}>Submit</button>
-            <button className="btn btn-primary" onClick={props.handleBack}>Go Back</button>
+                <button className="btn btn-primary" onClick={handleSubmit}>Submit</button>
+                <button className="btn btn-primary" onClick={props.handleBack}>Go Back</button>
             </div>
         </div>
     );

@@ -13,7 +13,7 @@ passport.use(
 		},
 		(username, password, done) => {
 			// find username in our data base
-			Users.findOne({ username })
+			Users.findOne({ username: username })
 				.then((user) => {
 					if (!user || !user.validatePassword(password)) {
 						// username not found or invalid password

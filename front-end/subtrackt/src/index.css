@@ -1,27 +1,29 @@
+@import "../node_modules/bootstrap/dist/css/bootstrap.min.css";
+
 body {
-  margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+	margin: 0;
+	font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
+		"Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
+		sans-serif;
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
 }
 
 code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+	font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
+		monospace;
 }
 
 .custom-form {
-  width: 50% !important;
-  display: inline-block !important;
+	width: 50% !important;
+	display: inline-block !important;
 }
 
-.custom-button{
-  display: inline-block;
+.custom-button {
+	display: inline-block;
 }
 
-.custom-delete{
-  width:50px;
-  height:60px;
+.custom-delete {
+	width: 50px;
+	height: 60px;
 }
