@@ -27,6 +27,15 @@ router.post('/register', auth.optional, (req, res, next) => {
         })
     }
 
+    if(Users.findOne({username: user.username}))
+    {
+        return res.status(422).json({
+            errors: {
+                username: 'already taken',
+            },
+        }) 
+    }
+
     const finalUser = new Users(user)
 
     finalUser.setPassword(user.password)
