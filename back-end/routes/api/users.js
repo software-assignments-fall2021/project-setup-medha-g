@@ -6,7 +6,7 @@ const auth = require('../auth')
 const Users = mongoose.model('Users')
 
 // post request at /api/users/register, register the user
-router.post('/register', auth.optional, (req, res, next) => {
+router.post('/register', auth.optional, async (req, res, next) => {
     const {
         body: { user },
     } = req
@@ -27,13 +27,12 @@ router.post('/register', auth.optional, (req, res, next) => {
         })
     }
 
-    if(Users.findOne({username: user.username}))
-    {
+    if (await Users.findOne({ username: user.username }) != null ) {
         return res.status(422).json({
             errors: {
                 username: 'already taken',
             },
-        }) 
+        })
     }
 
     const finalUser = new Users(user)
@@ -103,6 +102,24 @@ router.get('/current', auth.required, (req, res, next) => {
 
         return res.json({ user: user.generateAuthRes() })
     })
+})
+
+// allow logged in user to delete their account
+router.delete('/deleteaccount', auth.required, (req, res, next) => {
+    const {
+        payload: { username }, // remember that we signed the _id to the jwt
+    } = req
+    // const username = req.payload.username;
+    // invalidate token
+    
+
+    Users.deleteOne({username: username}, function (err) {
+        if (err) return res.json({message: "deleteOne() failed"});
+        else {return res.json({message: "Sucess"})}
+      });
+    
+    
+    
 })
 
 module.exports = router
