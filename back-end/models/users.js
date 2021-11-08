@@ -12,6 +12,15 @@ const UsersSchema = new Schema({
 	username: String,
 	hashed_password: String,
 	salt: String,
+	subscriptions: [{
+		type: String
+	}],
+	costs: [{
+		type: Number
+	}],
+	per_time_unit: [{
+		type: String
+	}]
 });
 
 UsersSchema.methods.setPassword = function (password) {
@@ -30,9 +39,14 @@ UsersSchema.methods.validatePassword = function (password) {
 
 	return this.hashed_password === hash;
 };
+UsersSchema.methods.addSubscription = function (user, subscription, cost, per_time_unit){
+		this.subscriptions.push(subscription)
+		this.costs.push(cost)
+		this.per_time_unit.push(per_time_unit)
+}
 
 UsersSchema.methods.generateJWT = function () {
-	// generate JWT token
+	// generate JWT tokenssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssss
 	const today = new Date();
 	const expirationDate = new Date(today);
 	expirationDate.setTime(today.getTime() + 2 * 60 * 60 * 1000);

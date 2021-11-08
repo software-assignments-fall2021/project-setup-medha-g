@@ -3,7 +3,6 @@ const passport = require("passport");
 const router = require("express").Router();
 const auth = require("../auth");
 const Users = mongoose.model("Users");
-
 // post request at /api/users/register, register the user
 router.post("/register", auth.optional, (req, res, next) => {
 	const {
@@ -28,8 +27,7 @@ router.post("/register", auth.optional, (req, res, next) => {
 
 	const finalUser = new Users(user);
 
-	finalUser.setPassword(user.password);
-
+	finalUser.setPassword(user.password)
 	return finalUser
 		.save()
 		.then(() => res.json({ user: finalUser.generateAuthRes() }));
@@ -79,7 +77,14 @@ router.post("/login", auth.optional, (req, res, next) => {
 		}
 	)(req, res, next);
 });
-
+router.post("/subscriptioninfo",auth.required, (req) => {
+	const {
+		body: {sub_info},
+		payload: {_id},
+	}= req;
+	const user = Users.findById(_id)
+	user.addSubscription(sub_info.name, sub_info.cost, sub_info.per_time_unit)
+});
 // return current user
 router.get("/current", auth.required, (req, res, next) => {
 	const {
