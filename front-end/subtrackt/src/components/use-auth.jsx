@@ -1,8 +1,8 @@
-import React, {useState, useEffect, useContext, createContext} from 'react';
+import React, { useState, useContext, createContext } from 'react';
 
 const authContext = createContext();
 
-export const ProvideAuth = ({children}) => {
+export const ProvideAuth = ({ children }) => {
     const auth = useProvideAuth();
     return <authContext.Provider value={auth}>{children}</authContext.Provider>
 }
@@ -16,17 +16,17 @@ export const useProvideAuth = () => {
 
     const signin = (username, password, effect) => {
         setUser(username);
-        if(effect) effect();
+        if (effect) effect();
     }
 
     const signup = (username, password, effect) => {
         setUser(username);
-        if(effect) effect();
+        if (effect) effect();
     }
 
     const signout = (effect) => {
         setUser(false);
-        if(effect) effect();
+        if (effect) effect();
     }
 
     return {

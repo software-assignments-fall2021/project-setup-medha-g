@@ -13,7 +13,7 @@ function Subscription(props) {
 		<div className="row">
 			<div className="col-md-3 col-sm-6 col-xs-12 bootCols">
 				<h4>{props.title}</h4>
-				<img src={props.image} alt="Logo"></img>
+				<img src={props.image} alt="Logo" height="70px" width="70px"></img>
 			</div>
 			<div className="col-md-3 col-sm-6 col-xs-12 bootCols">
 				<h4>Description</h4>
@@ -24,9 +24,7 @@ function Subscription(props) {
 				<p>Price: {props.plan.price} for {props.plan.time_quantity} {props.plan.time_unit}</p>
 			</div>
 			<div className="col-md-3 col-sm-6 col-xs-12 bootCols">
-				{/* <button type="button" onClick={handleClick}><img src ="../images/delete_icon.png" alt = "Delete"> </img>Delete</button> */}
-				{/* <input type="image" size = "10" src = {deleteImage} onClick={handleClick} alt="Delete"/>  */}
-				<img src  = {deleteImage} onClick={handleClick} alt="Delete" className="custom-delete"/>
+				<img src  = {deleteImage} onClick={handleClick} alt="Delete" className="custom-delete" height="30px" width="30px"/>
 			</div>
 		</div>
 	);

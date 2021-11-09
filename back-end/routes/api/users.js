@@ -85,19 +85,38 @@ router.post("/subscriptioninfo",auth.required, (req) => {
 	const user = Users.findById(_id)
 	user.addSubscription(sub_info.name, sub_info.cost, sub_info.per_time_unit)
 });
+
 // return current user
-router.get("/current", auth.required, (req, res, next) => {
-	const {
-		payload: { _id }, // remember that we signed the _id to the jwt
-	} = req;
+router.get('/current', auth.required, (req, res, next) => {
+    const {
+        payload: { _id }, // remember that we signed the _id to the jwt
+    } = req
 
-	return Users.findById(_id).then((user) => {
-		if (!user) {
-			return res.sendStatus(400);
-		}
+    return Users.findById(_id).then((user) => {
+        if (!user) {
+            return res.sendStatus(400)
+        }
 
-		return res.json({ user: user.generateAuthRes() });
-	});
-});
+        return res.json({ user: user.generateAuthRes() })
+    })
+})
 
-module.exports = router;
+// allow logged in user to delete their account
+router.delete('/deleteaccount', auth.required, (req, res, next) => {
+    const {
+        payload: { username }, // remember that we signed the _id to the jwt
+    } = req
+    // const username = req.payload.username;
+    // invalidate token
+    
+
+    Users.deleteOne({username: username}, function (err) {
+        if (err) return res.json({message: "deleteOne() failed"});
+        else {return res.json({message: "Sucess"})}
+      });
+    
+    
+    
+})
+
+module.exports = router

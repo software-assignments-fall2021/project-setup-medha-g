@@ -1,3 +1,4 @@
+// eslint-disable-next-line new-cap
 const router = require("express").Router();
 const jwt = require("jsonwebtoken");
 const auth = require("../auth");
@@ -15,6 +16,7 @@ router.get("/checkAuthorize", auth.optional, (req, res) => {
 	} = req;
 
 	try {
+		// eslint-disable-next-line no-unused-vars
 		const payload = jwt.verify(token, JWT_SECRET);
 		res.json({ message: "If you see this mesasage you are authorized." });
 	} catch (err) {
