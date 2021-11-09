@@ -89,11 +89,29 @@ router.post('/addsubscriptioninfo', auth.required, (req, res, next) => {
         }
 
         user.addSubscription(sub_info)
-        user.save().then((err) => {
-            if (err) return res.status(400)
+        user.save().then(() => {
             return res.json({
                 message: `Added subscription ${JSON.stringify(sub_info)}`,
+                user: user.generateAuthRes(),
             })
+        })
+    })
+})
+
+// get the subscription list of the current user
+router.get('/getsublist', auth.required, (req, res, next) => {
+    const {
+        payload: { _id },
+    } = req
+
+    Users.findById(_id).then((user) => {
+        if (!user) {
+            return res.sendStatus(400)
+        }
+
+        return res.json({
+            subscriptions: user.subscriptions,
+            user: user.generateAuthRes(),
         })
     })
 })
@@ -124,7 +142,7 @@ router.delete('/deleteaccount', auth.required, (req, res, next) => {
     Users.deleteOne({ username: username }, function (err) {
         if (err) return res.json({ message: 'deleteOne() failed' })
         else {
-            return res.json({ message: 'Sucess' })
+            return res.json({ message: 'Success' })
         }
     })
 })

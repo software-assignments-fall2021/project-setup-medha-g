@@ -14,6 +14,7 @@ const UsersSchema = new Schema({
     salt: String,
     subscriptions: [
         {
+            index: Number,
             image: String,
             title: String,
             description: String,
