@@ -15,6 +15,7 @@ const UsersSchema = new Schema({
     isAdmin: Boolean,
     subscriptions: [
         {
+            index: Number,
             image: String,
             title: String,
             description: String,
