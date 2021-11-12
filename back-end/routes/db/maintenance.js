@@ -3,27 +3,49 @@ const mongoose = require('mongoose')
 const router = require('express').Router()
 const auth = require('../auth')
 const Users = mongoose.model('Users')
-require("dotenv").config({ silent: true });
-const DB_ADDR = process.env.DB_ADDR;
-
+require('dotenv').config({ silent: true })
+const DB_ADDR = process.env.DB_ADDR
 
 // deletes all users in data base
-router.delete('/deleteallusers', auth.optional, (req, res, next) => {
-    Users.deleteMany({}, function (err) {
-        if (err) return res.json({messasge: "deleteMany() failed"});
-        else {return res.json({messasge: "Sucess"})}
-      });
+router.delete('/deleteallusers', auth.optional, async (req, res, next) => {
+    const {
+        payload: { _id },
+    } = req
 
+    let admin = await Users.findById(_id)
+    if (!admin.isAdmin)
+        return res
+            .status(400)
+            .json({ error: 'Require admin user for this action.' })
+
+    Users.deleteMany({}, function (err) {
+        if (err) return res.json({ messasge: 'deleteMany() failed' })
+        else {
+            return res.json({ messasge: 'Sucess' })
+        }
+    })
 })
 
 // deletes the entire database
-router.delete('/wipedb', auth.optional, (req, res, next) => {
-    const conn = mongoose.createConnection(DB_ADDR);
-    conn.dropDatabase().then(() => res.json({ message: "Successfully dropped database" }));
+router.delete('/wipedb', auth.optional, async (req, res, next) => {
+    const {
+        payload: { _id },
+    } = req
+
+    let admin = await Users.findById(_id)
+    if (!admin.isAdmin)
+        return res
+            .status(400)
+            .json({ error: 'Require admin user for this action.' })
+
+    const conn = mongoose.createConnection(DB_ADDR)
+    conn.dropDatabase().then(() =>
+        res.json({ message: 'Successfully dropped database' })
+    )
 })
 
 // fill the database with dummy user data -- five usernames that start with test_, and random passwords
-router.post('/dummyfill', auth.optional, async (req, res, next) => {
+router.post('/dummyfill', auth.required, async (req, res, next) => {
     /**
      * Create a random string of given length
      * @param {number} length Length of the random string
@@ -42,7 +64,17 @@ router.post('/dummyfill', auth.optional, async (req, res, next) => {
         return result
     }
 
-    const insertedusers = [];
+    const {
+        payload: { _id },
+    } = req
+
+    let admin = await Users.findById(_id)
+    if (!admin.isAdmin)
+        return res
+            .status(400)
+            .json({ error: 'Require admin user for this action.' })
+
+    const insertedusers = []
 
     for (let i = 0; i < 5; i++) {
         const user = {
@@ -50,17 +82,19 @@ router.post('/dummyfill', auth.optional, async (req, res, next) => {
             password: makeid(10),
         }
 
-        const finalUser = new Users(user);
+        const finalUser = new Users(user)
+        finalUser.isAdmin = false
 
-        finalUser.setPassword(user.password);
+        finalUser.setPassword(user.password)
         // eslint-disable-next-line no-unused-vars
-        const saved = await finalUser.save();
-        console.log("Save success, pushing ", {user : finalUser.generateAuthRes()});
-        insertedusers.push({user : finalUser.generateAuthRes()});
-        
+        const saved = await finalUser.save()
+        console.log('Save success, pushing ', {
+            user: finalUser.generateAuthRes(),
+        })
+        insertedusers.push({ user: finalUser.generateAuthRes() })
     }
-    console.log("Inserted user = ", insertedusers);
-    return res.json(insertedusers);
+    console.log('Inserted user = ', insertedusers)
+    return res.json(insertedusers)
 })
 
-module.exports = router;
+module.exports = router

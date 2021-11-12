@@ -12,6 +12,7 @@ const UsersSchema = new Schema({
     username: String,
     hashed_password: String,
     salt: String,
+    isAdmin: Boolean,
     subscriptions: [
         {
             image: String,

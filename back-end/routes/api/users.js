@@ -26,6 +26,7 @@ router.post('/register', auth.optional, (req, res, next) => {
     }
 
     const finalUser = new Users(user)
+    finalUser.isAdmin = false // normal users should not be admin.
 
     finalUser.setPassword(user.password)
     return finalUser
