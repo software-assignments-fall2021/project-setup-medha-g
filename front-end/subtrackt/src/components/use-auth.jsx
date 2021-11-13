@@ -24,7 +24,10 @@ export const useProvideAuth = () => {
           password: password,
         },
       })
-      .then((res) => setUser(res.data.username))
+      .then((res) => {
+          setUser(res.data.user.username)
+          return res.data.user.username;
+        })
       .catch((error) => {
         setUser(false);
         setMessage(error.response.data.errors);
@@ -41,7 +44,10 @@ export const useProvideAuth = () => {
           password: password,
         },
       })
-      .then((res) => setUser(res.data.username))
+      .then((res) => {
+          setUser(res.data.user.username)
+          return res.data.user.username;
+        })
       .catch((error) => {
         setUser(false);
         console.log(error.message);

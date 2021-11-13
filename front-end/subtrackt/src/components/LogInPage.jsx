@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import {useHistory, useLocation, Link} from "react-router-dom";
 import { useAuth } from "./use-auth";
-import { Route, Switch, BrowserRouter as Router } from "react-router-dom";
 
 const LogInPage = (props) => {
     let history = useHistory();

@@ -1,4 +1,3 @@
-import logo from "../logo.svg";
 import "../styles/App.css";
 import SubscriptionList from "./SubscriptionList";
 import LandingPage from "./LandingPage";
