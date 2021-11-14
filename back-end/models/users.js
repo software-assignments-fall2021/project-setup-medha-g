@@ -67,7 +67,7 @@ UsersSchema.methods.generateJWT = function () {
 UsersSchema.methods.generateAuthRes = function () {
     // generate auth response that returns newest token
     return {
-        uername: this.username,
+        username: this.username,
         _id: this.id,
         token: this.generateJWT(),
     }
