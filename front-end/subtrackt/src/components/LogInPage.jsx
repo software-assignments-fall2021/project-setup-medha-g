@@ -53,7 +53,7 @@ const LogInPage = (props) => {
                 </div>
                 <br />
                 <button type="submit" className="btn btn-primary" onClick={handleSubmit}>Submit</button>
-                <Link className="navbar-nav" to="/register">Signup</Link>
+                <button className="btn btn-primary" onClick={props.handleChange}>Signup</button>
             </form>
             </div>
             {auth.errMessage ? <div>{auth.errMessage}</div> : null}

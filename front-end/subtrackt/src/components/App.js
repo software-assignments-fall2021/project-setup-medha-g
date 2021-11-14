@@ -1,12 +1,10 @@
 import "../styles/App.css";
-import SubscriptionList from "./SubscriptionList";
 import LandingPage from "./LandingPage";
 import Header from "./Header";
 import { Route, Switch, BrowserRouter as Router } from "react-router-dom";
-import LogInPage from "./LogInPage";
 import { ProvideAuth } from "./use-auth";
-import PrivateRoute from "./PrivateRoute";
 import RegisterPage from "./RegisterPage";
+import ProtectPage from './ProtectPage'
 
 console.log("api key: ", process.env.REACT_APP_CLEARBIT_API_KEY)
 
@@ -17,21 +15,13 @@ function App() {
         <Router>
           <Header />
           <Switch>
-            <Route path="/login">
-              <LogInPage />
-            </Route>
-
             <Route path="/landing">
               <LandingPage />
             </Route>
 
-            <Route path="/register">
-              <RegisterPage />
+            <Route path="/sub_list">
+              <ProtectPage />
             </Route>
-
-            <PrivateRoute path="/sub_list">
-              <SubscriptionList />
-            </PrivateRoute>
           </Switch>
         </Router>
       </div>
