@@ -5,24 +5,27 @@ const router = require('express').Router()
 const auth = require('../auth')
 const Users = mongoose.model('Users')
 // post request at /api/users/register, register the user
-router.post('/register', auth.optional, (req, res, next) => {
+router.post('/register', auth.optional, async (req, res, next) => {
     const {
         body: { user },
     } = req
 
     if (!user.username) {
         return res.status(422).json({
-            errors: {
-                username: 'is required',
-            },
+            errors: 'username is required',
         })
     }
 
     if (!user.password) {
         return res.status(422).json({
-            errors: {
-                password: 'is required',
-            },
+            errors: 'password is required',
+        })
+    }
+
+    let exist = await Users.findOne({username: user.username});
+    if(exist) {
+        return res.status(422).json({
+            errors: 'username already taken'
         })
     }
 
@@ -43,17 +46,13 @@ router.post('/login', auth.optional, (req, res, next) => {
 
     if (!user.username) {
         return res.status(422).json({
-            errors: {
-                username: 'is required',
-            },
+            errors: 'username is required',
         })
     }
 
     if (!user.password) {
         return res.status(422).json({
-            errors: {
-                password: 'is required',
-            },
+            errors: 'password is required',
         })
     }
 
@@ -75,8 +74,7 @@ router.post('/login', auth.optional, (req, res, next) => {
             }
 
             // authentication err
-            console.log("Login error ", info);
-            return res.status(400).json(info);
+            return res.status(400).json(info)
         }
     )(req, res, next)
 })

@@ -15,11 +15,9 @@ const RegisterPage = (props) => {
 
     // Handlers ==================================================================================================
     const handleUsername = (event) => {
-        console.log(`Username changed to: ${event.target.value}`);
         setUsername(event.target.value);
     };
     const handlePassword = (event) => {
-        console.log(`Password set to: ${event.target.value}`);
         setPassword(event.target.value);
     };
     const handleSubmit = e => {
@@ -27,6 +25,7 @@ const RegisterPage = (props) => {
         e.preventDefault();
         auth.signup(username, password, history.replace(from));
     }
+
     return (
         <div className="Register">
             <form className="custom-form">
@@ -52,6 +51,7 @@ const RegisterPage = (props) => {
                 </div>
                 <br />
                 <button type="submit" className="btn btn-primary" onClick={handleSubmit}>Submit</button>
+                <button className="btn btn-primary" onClick={props.handleChange}>Signin</button>
             </form>
             {auth.errMessage ? <div>{auth.errMessage}</div> : null}
         </div>
