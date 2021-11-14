@@ -1,5 +1,6 @@
 const mongoose = require('mongoose')
 const passport = require('passport')
+// eslint-disable-next-line new-cap
 const router = require('express').Router()
 const auth = require('../auth')
 const Users = mongoose.model('Users')
@@ -74,12 +75,14 @@ router.post('/login', auth.optional, (req, res, next) => {
             }
 
             // authentication err
-            return res.status(400).send(info)
+            console.log("Login error ", info);
+            return res.status(400).json(info);
         }
     )(req, res, next)
 })
 router.post('/addsubscriptioninfo', auth.required, (req, res, next) => {
     const {
+        // eslint-disable-next-line camelcase
         body: { sub_info },
         payload: { _id },
     } = req

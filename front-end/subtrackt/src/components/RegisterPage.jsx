@@ -1,16 +1,17 @@
 import React, { useState } from "react";
-import {useHistory, useLocation, Link} from "react-router-dom";
 import { useAuth } from "./use-auth";
+import {useHistory, useLocation} from "react-router-dom";
 
-const LogInPage = (props) => {
-    let history = useHistory();
-    let location = useLocation();
-    let auth = useAuth();
 
-    let {from} = location.state || {fromt : {pathname:"/"}}
+const RegisterPage = (props) => {
 
     const [username, setUsername] = useState("");
     const [password, setPassword] = useState("");
+    
+    let auth = useAuth();
+    let history = useHistory();
+    let location = useLocation();
+    let {from} = location.state || {fromt : {pathname:"/"}}
 
     // Handlers ==================================================================================================
     const handleUsername = (event) => {
@@ -24,14 +25,12 @@ const LogInPage = (props) => {
     const handleSubmit = e => {
         // prevent the HTML form from actually submitting 
         e.preventDefault();
-        auth.signin(username, password, history.replace(from));
+        auth.signup(username, password, history.replace(from));
     }
-
     return (
-        <div className="Login">
-            <div>
+        <div className="Register">
             <form className="custom-form">
-                <label>Log In:</label>
+                <label>Register for Subtrackt:</label>
                 <div className="mb-3">
                     <input
                         type="text"
@@ -53,13 +52,13 @@ const LogInPage = (props) => {
                 </div>
                 <br />
                 <button type="submit" className="btn btn-primary" onClick={handleSubmit}>Submit</button>
-                <Link className="navbar-nav" to="/register">Signup</Link>
             </form>
-            </div>
             {auth.errMessage ? <div>{auth.errMessage}</div> : null}
         </div>
-
     );
 };
 
-export default LogInPage;
+export default RegisterPage;
+
+
+
