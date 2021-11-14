@@ -18,7 +18,7 @@ passport.use(
 					if (!user || !user.validatePassword(password)) {
 						// username not found or invalid password
 						return done(null, false, {
-							errors: { "username or password": "is invalid" },
+							errors: "username or password is invalid"
 						});
 					}
 

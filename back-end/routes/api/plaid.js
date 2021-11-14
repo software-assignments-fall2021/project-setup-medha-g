@@ -65,11 +65,37 @@ app.get("/transaction", auth.required, async (req,res) => {
     let start_date = new Date(today);
     start_date.setFullYear(date.getFullYear() - 1);
 
+    let start_date_string = `${start_date.getFullYear()}-${start_date.getMonth()}-${start_date.getDate()}`;
+    let end_date_string = `${end_date.getFullYear()}-${end_date.getMonth()}-${end_date.getDate()}`
+
     const request = {
         access_token: access_token,
-        start_date: `${start_date.getFullYear()}-${start_date.getMonth()}-${start_date.getDate()}`,
-        end_date: `${end_date.getFullYear()}-${end_date.getMonth()}-${end_date.getDate()}`
+        start_date: start_date_string,
+        end_date: end_date_string
     }
 
+    try {
+        const response = await client.transactionsGet(request);
+        let transactions = response.data.transactions;
+        const total_transactions = response.data.total_transactions;
+        while(transactions.length < total_transactions) {
+            const paginated_request = {
+                access_token: access_token,
+                start_date: start_date_string,
+                end_date: end_date_string,
+                options: {
+                    offset: transactions.length
+                }
+            }
+
+            const paginated_response = await client.transactionsGet(paginated_request);
+            transactions = transactions.concat(paginated_response.data.transactions);
+        }
+
+        return res.json(transactions);
+    } catch (error) {
+        console.log(error);
+        return res.json({err: error.message});
+    }
 
 })

@@ -1,5 +1,5 @@
 const server = require('./app');
-const port = 3000;
+const port = 4090;
 
 const listener = server.listen(port, () => {
     console.log(`Server running on port ${port}`);
