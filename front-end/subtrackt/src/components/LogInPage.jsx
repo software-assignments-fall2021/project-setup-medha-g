@@ -14,11 +14,9 @@ const LogInPage = (props) => {
 
     // Handlers ==================================================================================================
     const handleUsername = (event) => {
-        console.log(`Username changed to: ${event.target.value}`);
         setUsername(event.target.value);
     };
     const handlePassword = (event) => {
-        console.log(`Password set to: ${event.target.value}`);
         setPassword(event.target.value);
     };
     const handleSubmit = e => {

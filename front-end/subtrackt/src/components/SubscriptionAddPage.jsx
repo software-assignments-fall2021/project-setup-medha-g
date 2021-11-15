@@ -1,6 +1,8 @@
-import React, { useState} from "react";
-// import 'bootstrap/dist/css/min.css';
+import axios from "axios";
+import React, { useState, useCallback, useEffect } from "react";
+import { useAuth } from "./use-auth";
 import placeholderImage from '../images/placeholder_icon.png';
+import ParseOption from "./ParseOption";
 
 
 function usePlan() {
@@ -39,8 +41,10 @@ function usePlan() {
 
 const SubscriptionAddPage = (props) => {
 
-   
     const [subscriptionTitle, setTitle] = useState("");
+    const [link_token, setLink] = useState(null);
+    const [access_token, setAccess] = useState(null);
+    const auth = useAuth();
 
     /**
      * plan state variable should follow this format
@@ -51,6 +55,34 @@ const SubscriptionAddPage = (props) => {
      * }
      */
     const [plan, setPrice, setTimeQuantity, setTimeUnit] = usePlan();
+
+    const createLinkToken = useCallback(async (jwt) => {
+        const config = {
+            headers: {
+                Authorization: `Token ${jwt}`
+            }
+        }
+        const res = await axios.get('http://localhost:4090/api/plaid/create_link_token', config);
+        setLink(res.data.link_token);
+    }, []);
+
+    const getAccessToken = async (public_token) => {
+        const config = {
+            headers: {
+                Authorization: `Token ${auth.jwt}`
+            }
+        }
+
+        const res = await axios.post('http://localhost:4090/api/plaid/get_access_token', { public_token: public_token }, config);
+
+        setAccess(res.data.access_token);
+    }
+
+    useEffect(() => {
+        console.log("Sending link token create request, jwt is ", auth.jwt);
+        if(auth.jwt) createLinkToken(auth.jwt);
+    }, [createLinkToken, auth.jwt]);
+
 
     // Handlers ==================================================================================================
 
@@ -140,7 +172,10 @@ const SubscriptionAddPage = (props) => {
             </div>
             <div>
                 <button className="btn btn-primary" onClick={handleSubmit}>Submit</button>
-                <button className="btn btn-primary" onClick={props.handleBack}>Go Back</button>
+                <button className="btn btn-primary" onClick={props.handleBack}>Close</button>
+            </div>
+            <div>
+                <ParseOption access_token={access_token} token={link_token} getAccessToken={getAccessToken} />
             </div>
         </div>
     );
