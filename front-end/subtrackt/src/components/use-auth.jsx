@@ -14,6 +14,7 @@ export const useAuth = () => {
 
 export const useProvideAuth = () => {
   const [user, setUser] = useState(null);
+  const [jwt, setJwt] = useState(null);
   const [errMessage, setMessage] = useState(null);
 
   const signin = (username, password, effect) => {
@@ -25,7 +26,8 @@ export const useProvideAuth = () => {
         },
       })
       .then((res) => {
-          setUser(res.data.user.username)
+          setUser(res.data.user.username);
+          setJwt(res.data.user.token);
           return res.data.user.username;
         })
       .catch((error) => {
@@ -62,6 +64,7 @@ export const useProvideAuth = () => {
 
   return {
     user,
+    jwt,
     signin,
     signup,
     signout,

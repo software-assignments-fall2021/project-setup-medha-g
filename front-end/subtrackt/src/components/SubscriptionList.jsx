@@ -105,7 +105,7 @@ const SubscriptionList = () => {
     const handleUnseePage = () => {
         toggleSeePage(false);
         var currAddButton = document.getElementById("addButton");
-        currAddButton.style.display = "block";
+        currAddButton.style.display = "inline-block";
     }
     
 
@@ -124,7 +124,7 @@ const SubscriptionList = () => {
     return (
         <div className="SubscriptionBox">
             <h3>Your Subscriptions</h3>
-            <button className= "btn btn-primary custom-button" onClick={handleSeePage} id="addButton">+</button>
+            <button className= "btn btn-primary" onClick={handleSeePage} id="addButton">+</button>
             {seePage ? <SubcriptionAddPage handleSubmit={handleAddSub} handleBack={handleUnseePage}/> : null}
             <ol className="SubscriptionList">
                 {renderList()}

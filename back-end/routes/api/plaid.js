@@ -7,7 +7,7 @@ const PLAID_CLIENT_ID = process.env.PLAID_CLIENT_ID
 const PLAID_SECRET = process.env.PLAID_SECRET
 
 const configuration = new plaid.Configuration({
-    basePath: PlaidEnvironments['sandbox'],
+    basePath: plaid.PlaidEnvironments['sandbox'],
     baseOptions: {
         headers: {
             'PLAID-CLIENT-ID': PLAID_CLIENT_ID,
@@ -18,19 +18,19 @@ const configuration = new plaid.Configuration({
 
 const client = new plaid.PlaidApi(configuration);
 
-router.app("/create_link_token", auth.required, async (req, res) => {
+router.get("/create_link_token", auth.required, async (req, res) => {
     const {
         payload: {username}
     } = req;
 
     const request = {
         user: {
-            client_user_id = username
+            client_user_id: username
         },
         client_name: "Subtrakt",
         products: [plaid.Products.Auth, plaid.Products.Transactions],
         language: "en",
-        contry_codes: [plaid.CountryCode.Us]
+        country_codes: [plaid.CountryCode.Us]
     };
 
     try {
@@ -38,11 +38,11 @@ router.app("/create_link_token", auth.required, async (req, res) => {
         return res.json(response.data);
     } catch (error) {
         console.log("create_link_token err: ", error.message);
-        return res.send({err: err.message});
+        return res.status(400).json({err: error.response.data});
     }
 })
 
-app.post("/get_access_token", auth.required, async (req, res) => {
+router.post("/get_access_token", auth.required, async (req, res) => {
     const {
         body: {public_token}
     } = req;
@@ -52,11 +52,11 @@ app.post("/get_access_token", auth.required, async (req, res) => {
         const item_id = response.data.item_id;
         return res.json({access_token: response.data.access_token, item_id: item_id});
     } catch (error) {
-        return res.json({err: error.message});
+        return res.status(400).json({err: error.message});
     }
 })
 
-app.get("/transaction", auth.required, async (req,res) => {
+router.get("/transaction", auth.required, async (req,res) => {
     const {
         headers: {access_token}
     } = req;
@@ -95,7 +95,9 @@ app.get("/transaction", auth.required, async (req,res) => {
         return res.json(transactions);
     } catch (error) {
         console.log(error);
-        return res.json({err: error.message});
+        return res.status(400).json({err: error.message});
     }
 
 })
+
+module.exports = router

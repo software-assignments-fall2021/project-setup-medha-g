@@ -16,7 +16,9 @@ const ParseLink = props => {
         onExit={onExit} 
         onSuccess={onSuccess} 
         onEvent={onEvent}>
-            Parse Link
+            Connect Account
         </PlaidLink>
     )
 }
+
+export default ParseLink;
