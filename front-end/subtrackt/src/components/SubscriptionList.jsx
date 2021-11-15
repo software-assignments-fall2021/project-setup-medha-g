@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Subscription from './Subscription';
 import SubcriptionAddPage from './SubscriptionAddPage';
 
@@ -89,7 +89,7 @@ const SubscriptionList = () => {
     // Handlers ==================================================================================================
 
     const handleAddSub = sub => {
-        // sub = generateRandomSub(); uncomment for testing
+        // sub = generateRandomSub(); 
         addList(sub);
     }
     const handleDeleteSub = index => {

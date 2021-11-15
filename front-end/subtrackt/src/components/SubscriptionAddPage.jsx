@@ -41,6 +41,7 @@ const SubscriptionAddPage = (props) => {
 
    
     const [subscriptionTitle, setTitle] = useState("");
+    const [link_token, setToken] = useState(null);
 
     /**
      * plan state variable should follow this format
