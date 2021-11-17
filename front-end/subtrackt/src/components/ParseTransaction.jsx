@@ -1,13 +1,18 @@
 import React from 'react';
 import axios from "axios";
+import { useAuth } from './use-auth';
 
 
 const ParseTransactions = props => {
+    const auth = useAuth();
 
     const handleParse = () => {
-        
-        const call = axios.get('http://localhost:4090/api/parsetrans/parse');
-        
+        axios.get("/api/parsetrans/parse", {headers: {
+            access_token: props.token, 
+            Authorization: auth.jwt
+        }}).then(res => {
+            
+        })
     }
 
 

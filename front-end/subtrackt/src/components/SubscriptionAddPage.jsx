@@ -115,9 +115,7 @@ const SubscriptionAddPage = (props) => {
                 image: company.logo,
                 title: company.name,
                 description: company.description,
-                plan: plan
-    
-                
+                plan: plan            
             })
             
         })
