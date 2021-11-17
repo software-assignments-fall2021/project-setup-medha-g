@@ -15,7 +15,6 @@ const UsersSchema = new Schema({
     isAdmin: Boolean,
     subscriptions: [
         {
-            index: Number,
             image: String,
             title: String,
             description: String,
@@ -46,6 +45,9 @@ UsersSchema.methods.validatePassword = function (password) {
 }
 UsersSchema.methods.addSubscription = function (sub) {
     this.subscriptions.push(sub)
+}
+UsersSchema.methods.deleteSubscription = function (index) {
+    this.subscriptions.splice(index, 1);
 }
 
 UsersSchema.methods.generateJWT = function () {

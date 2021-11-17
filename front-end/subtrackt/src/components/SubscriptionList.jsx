@@ -1,33 +1,16 @@
-import React, { useState, useEffect } from 'react';
+import axios from 'axios';
+import React, { useState, useEffect, useCallback } from 'react';
 import Subscription from './Subscription';
 import SubcriptionAddPage from './SubscriptionAddPage';
+import useAsync from './use-async';
+import { useAuth } from './use-auth';
 
 /* Test variable and functions ===================================================================================
-
-var startList = [{
-    index: 0,
-    image: "image0",
-    description: "desc0",
-    plan: "plan0"
-},
-{
-    index: 1,
-    image: "image1",
-    description: "desc1",
-    plan: "plan1"
-},
-{
-    index: 2,
-    image: "image2",
-    description: "desc2",
-    plan: "plan2"
-}]
 
 */
 
 function generateRandomSub() {
     return {
-        index: 0,
         image: (Math.random() + 1).toString(36).substring(7),
         title: (Math.random() + 1).toString(36).substring(7),
         description: (Math.random() + 1).toString(36).substring(7),
@@ -49,7 +32,6 @@ function useSubList(initList) {
 
     const addSublist = sub => {
         setSublist(prev => {
-            sub.index = prev.length;
             return [...prev, sub]
         });
     }
@@ -58,65 +40,89 @@ function useSubList(initList) {
             // create new array
             var newarr = [...prev];
             newarr.splice(index, 1);
-            //update index
-            return newarr.map((value, index) => ({
-                index: index,
-                image: value.image,
-                title: value.title,
-                description: value.description,
-                plan: value.plan,
-            }))
+            return newarr;
         });
     }
 
-    return [sublist, addSublist, deleteSublist];
+    return [sublist, addSublist, deleteSublist, setSublist];
 }
 
 const SubscriptionList = () => {
+
     /**
      * Array to keep track of subscriptions, subscription object should have the following property:
      * {
-     *  index: index of the subscription, //index is the key of the following elements
      *  image: logo image link,
      *  title: title/name of the subscription,
      *  description: description of the subscription,
      *  plan: price plan
      * }
      */
-    const [sublist, addList, deleteList] = useSubList([]);
-    const [seePage, toggleSeePage] = useState(false); 
+    const [sublist, addList, deleteList, setList] = useSubList([]);
+    const [seePage, toggleSeePage] = useState(false);
+    const auth = useAuth();
+
+    const getDBList = useCallback(async () => {
+        if (auth.jwt) {
+            const res = await axios.get("/api/users/getsublist", {
+                headers: {
+                    Authorization: `Token ${auth.jwt}`
+                }
+            });
+
+            auth.setJwt(res.data.user.token);
+            setList(res.data.subscriptions);
+        }
+    }, [auth, setList])
+
+    const dblist = useAsync(getDBList);
 
     // Handlers ==================================================================================================
 
     const handleAddSub = sub => {
         // sub = generateRandomSub(); 
+        axios.post("/api/users/addsubscriptioninfo", { sub_info: sub }, {
+            headers: {
+                Authorization: `Token ${auth.jwt}`
+            }
+        }).then(res => auth.setJwt(res.data.user.token));
         addList(sub);
     }
     const handleDeleteSub = index => {
+        axios.post("/api/users/removesubscriptioninfo", { index: index }, {
+            headers: {
+                Authorization: `Token ${auth.jwt}`
+            }
+        }).then(res => auth.setJwt(res.data.user.token));
         deleteList(index);
     }
     const handleSeePage = () => {
         toggleSeePage(true);
         var currAddButton = document.getElementById("addButton");
         currAddButton.style.display = "none";
-        
-        
+
+
     }
     const handleUnseePage = () => {
         toggleSeePage(false);
         var currAddButton = document.getElementById("addButton");
         currAddButton.style.display = "inline-block";
     }
-    
+
 
     // Handlers END ===============================================================================================
 
     const renderList = () => {
-        /**
-         * Content of this function is temporary until Subscription component is completed
-         */
-        return sublist.map((item) => <li key={item.index}>
-            <Subscription index={item.index} image={item.image} title={item.title} description={item.description} plan={item.plan} deleteSublist={handleDeleteSub}/>
+        if (dblist.status === "idle") {
+            return <li key={0}>Fetching</li>
+        }
+
+        if (dblist.status === "error") {
+            return <li key={0}>Error when fetching data</li>
+        }
+
+        return sublist.map((item, index) => <li key={index}>
+            <Subscription index={index} image={item.image} title={item.title} description={item.description} plan={item.plan} deleteSublist={handleDeleteSub} />
         </li>);
     }
 
@@ -124,8 +130,8 @@ const SubscriptionList = () => {
     return (
         <div className="SubscriptionBox">
             <h3>Your Subscriptions</h3>
-            <button className= "btn btn-primary" onClick={handleSeePage} id="addButton">+</button>
-            {seePage ? <SubcriptionAddPage handleSubmit={handleAddSub} handleBack={handleUnseePage}/> : null}
+            <button className="btn btn-primary" onClick={handleSeePage} id="addButton">+</button>
+            {seePage ? <SubcriptionAddPage handleSubmit={handleAddSub} handleBack={handleUnseePage} /> : null}
             <ol className="SubscriptionList">
                 {renderList()}
             </ol>
