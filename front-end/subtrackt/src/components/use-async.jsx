@@ -5,7 +5,7 @@ const useAsync = (asyncFunction, immediate = true) => {
     const [value, setValue] = useState(null);
     const [error, setError] = useState(null);
 
-    const execute = useCallback(() => {
+    const execute = useCallback(() => { 
         setStatus("pending");
         setValue(null);
         setError(null);
@@ -23,7 +23,7 @@ const useAsync = (asyncFunction, immediate = true) => {
         if (immediate) {
             execute();
         }
-    }, [execute, immediate]);
+    }, [execute, immediate]); // every time execute or immediate changes, trigger execute
 
     return {execute, status, value, error};
 }

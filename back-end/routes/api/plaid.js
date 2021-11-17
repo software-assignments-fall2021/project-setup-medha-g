@@ -1,3 +1,5 @@
+/* eslint-disable camelcase */
+// eslint-disable-next-line new-cap
 const router = require('express').Router()
 const auth = require('../auth')
 const plaid = require('plaid')
@@ -61,12 +63,12 @@ router.get("/transaction", auth.required, async (req,res) => {
         headers: {access_token}
     } = req;
 
-    let end_date = new Date();
-    let start_date = new Date(today);
+    const end_date = new Date();
+    const start_date = new Date(today);
     start_date.setFullYear(date.getFullYear() - 1);
 
-    let start_date_string = `${start_date.getFullYear()}-${start_date.getMonth()}-${start_date.getDate()}`;
-    let end_date_string = `${end_date.getFullYear()}-${end_date.getMonth()}-${end_date.getDate()}`
+    const start_date_string = `${start_date.getFullYear()}-${start_date.getMonth()}-${start_date.getDate()}`;
+    const end_date_string = `${end_date.getFullYear()}-${end_date.getMonth()}-${end_date.getDate()}`
 
     const request = {
         access_token: access_token,

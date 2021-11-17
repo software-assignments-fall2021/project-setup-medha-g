@@ -41,6 +41,7 @@ function usePlan() {
 
 const SubscriptionAddPage = (props) => {
 
+    // eslint-disable-next-line no-unused-vars
     const [subscriptionTitle, setTitle] = useState("");
     const [link_token, setLink] = useState(null);
     const [access_token, setAccess] = useState(null);
@@ -114,9 +115,7 @@ const SubscriptionAddPage = (props) => {
                 image: company.logo,
                 title: company.name,
                 description: company.description,
-                plan: plan
-    
-                
+                plan: plan            
             })
             
         })
