@@ -62,7 +62,7 @@ const SubscriptionAddPage = (props) => {
                 Authorization: `Token ${jwt}`
             }
         }
-        const res = await axios.get('http://localhost:4090/api/plaid/create_link_token', config);
+        const res = await axios.get('/api/plaid/create_link_token', config);
         setLink(res.data.link_token);
     }, []);
 
@@ -73,13 +73,12 @@ const SubscriptionAddPage = (props) => {
             }
         }
 
-        const res = await axios.post('http://localhost:4090/api/plaid/get_access_token', { public_token: public_token }, config);
+        const res = await axios.post('/api/plaid/get_access_token', { public_token: public_token }, config);
 
         setAccess(res.data.access_token);
     }
 
     useEffect(() => {
-        console.log("Sending link token create request, jwt is ", auth.jwt);
         if(auth.jwt) createLinkToken(auth.jwt);
     }, [createLinkToken, auth.jwt]);
 
@@ -164,7 +163,6 @@ const SubscriptionAddPage = (props) => {
                     onChange={handleTimeQuantity}
                 />
                 <select className="form-select" onChange={handleTimeUnit}>
-                    <option defaultValue>Select timeunit</option>
                     <option value="day">day</option>
                     <option value="month">month</option>
                     <option value="year">year</option>
