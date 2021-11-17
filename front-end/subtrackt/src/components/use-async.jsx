@@ -23,7 +23,7 @@ const useAsync = (asyncFunction, immediate = true) => {
         if (immediate) {
             execute();
         }
-    }, [execute, immediate]);
+    }, [execute, immediate]); // every time execute or immediate changes, trigger execute
 
     return {execute, status, value, error};
 }
