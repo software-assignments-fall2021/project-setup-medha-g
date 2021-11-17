@@ -12,7 +12,7 @@ router.delete('/deleteallusers', auth.optional, async (req, res, next) => {
         payload: { _id },
     } = req
 
-    let admin = await Users.findById(_id)
+    const admin = await Users.findById(_id)
     if (!admin.isAdmin)
         return res
             .status(400)
@@ -32,7 +32,7 @@ router.delete('/wipedb', auth.optional, async (req, res, next) => {
         payload: { _id },
     } = req
 
-    let admin = await Users.findById(_id)
+    const admin = await Users.findById(_id)
     if (!admin.isAdmin)
         return res
             .status(400)
@@ -68,7 +68,7 @@ router.post('/dummyfill', auth.required, async (req, res, next) => {
         payload: { _id },
     } = req
 
-    let admin = await Users.findById(_id)
+    const admin = await Users.findById(_id)
     if (!admin.isAdmin)
         return res
             .status(400)
