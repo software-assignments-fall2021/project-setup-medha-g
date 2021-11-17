@@ -24,8 +24,9 @@ router.post('/register', auth.optional, async (req, res, next) => {
 
     const exist = await Users.findOne({username: user.username});
     if(exist) {
+
         return res.status(422).json({
-            errors: 'username already taken'
+            errors: 'username already taken',
         })
     }
 
@@ -78,6 +79,7 @@ router.post('/login', auth.optional, (req, res, next) => {
         }
     )(req, res, next)
 })
+
 router.post('/addsubscriptioninfo', auth.required, (req, res, next) => {
     const {
         // eslint-disable-next-line camelcase
@@ -87,7 +89,7 @@ router.post('/addsubscriptioninfo', auth.required, (req, res, next) => {
 
     Users.findById(_id).then((user) => {
         if (!user) {
-            return res.sendStatus(400)
+            return res.status(400).json({error: "user not found"});
         }
 
         user.addSubscription(sub_info)
@@ -97,6 +99,27 @@ router.post('/addsubscriptioninfo', auth.required, (req, res, next) => {
                 user: user.generateAuthRes(),
             })
         })
+    })
+})
+
+router.post('/removesubscriptioninfo', auth.required, (req, res, next) => {
+    const {
+        body: { index },
+        payload: { _id },
+    } = req
+
+    Users.findById(_id).then((user) => {
+        if(!user) {
+            return res.status(400).json({error: "user not found"});
+        }
+
+        user.deleteSubscription(index);
+        user.save().then(() => {
+            return res.json({
+                message: `Deleted subscription`,
+                user: user.generateAuthRes()
+            })
+        });
     })
 })
 

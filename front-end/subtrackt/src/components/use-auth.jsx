@@ -47,7 +47,8 @@ export const useProvideAuth = () => {
         },
       })
       .then((res) => {
-          setUser(res.data.user.username)
+          setUser(res.data.user.username);
+          setJwt(res.data.user.token);
           return res.data.user.username;
         })
       .catch((error) => {
@@ -65,6 +66,7 @@ export const useProvideAuth = () => {
   return {
     user,
     jwt,
+    setJwt,
     signin,
     signup,
     signout,
