@@ -7,11 +7,12 @@ const ParseTransactions = props => {
     const auth = useAuth();
 
     const handleParse = () => {
-        axios.get("/api/parsetrans/parse", {headers: {
+        console.log("jwt token is", auth.jwt)
+        axios.get("/api/plaid/parse", {headers: {
             access_token: props.token, 
-            Authorization: auth.jwt
+            Authorization: `Token ${auth.jwt}`
         }}).then(res => {
-            
+            props.handleRender.update();
         })
     }
 

@@ -1,35 +1,35 @@
+@import "./styles/ParseLink.css";
 
-*{
-	margin:0;
-	padding:0;
-
+* {
+	margin: 0;
+	padding: 0;
 }
 .navbar {
 	overflow: hidden;
 	background-color: #b4896c;
 	position: fixed; /* Set the navbar to fixed position */
-	top: 0; 
-	width: 100%; 
-  }
+	top: 0;
+	width: 100%;
+}
 
-  .navbar a {
+.navbar a {
+	size: 100%;
 	float: left;
 	display: block;
 	color: #f2f2f2;
 	text-align: center;
 	padding: 14px 16px;
 	text-decoration: none;
-  }
+}
 
-  .navbar a:hover {
+.navbar a:hover {
 	background: #926c68;
 	color: black;
-  }
+}
 
-  .main {
+.main {
 	margin-top: 30px; /* Add a top margin to avoid content overlay */
-  }
-
+}
 
 body {
 	margin: 0;
@@ -39,15 +39,15 @@ body {
 	-webkit-font-smoothing: antialiased;
 	-moz-osx-font-smoothing: grayscale;
 	font-size: 17px;
-	color:#926c68;
+	color: #926c68;
 	line-height: 1.6;
 }
 
-#showcase{
+#showcase {
 	background-image: url(../src/images/background_landing.png);
-	height:800px;
+	height: 800px;
 	background-size: cover;
-	background-position:center;
+	background-position: center;
 	display: flex;
 	flex-direction: column;
 	justify-content: center;
@@ -55,47 +55,45 @@ body {
 	padding: 0 20px;
 }
 
-#showcase h1{
+#showcase h1 {
 	font-size: 50px;
 	line-height: 1.2;
 }
 
-#showcase p{
+#showcase p {
 	font-size: 20px;
 }
 
-#showcase .button{
+#showcase .button {
 	font-size: 18px;
 	text-decoration: none;
-	color:white;
+	color: white;
 	background-color: #926c68;
 	padding: 10px 20px;
 	border-radius: 10px;
 	margin-top: 20px;
 }
 
-#showcase .button:hover{
-	background:burlywood;
-	color:bisque;
+#showcase .button:hover {
+	background: burlywood;
+	color: bisque;
 }
 
-
-#section-a{
-	padding:20px;
-	background:#98ccb3;
-	color:white;
-	text-align:center;
+#section-a {
+	padding: 20px;
+	background: #98ccb3;
+	color: white;
+	text-align: center;
 }
 
-#section-a .box-1{
-	background:cornsilk;
+#section-a .box-1 {
+	background: cornsilk;
 }
 
 code {
 	font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
 		monospace;
 }
-
 
 .custom-form {
 	padding-top: 100px;
@@ -108,16 +106,16 @@ code {
 	display: inline-block;
 	font-size: 18px;
 	text-decoration: none;
-	color:white;
+	color: white;
 	background-color: #926c68;
 	padding: 10px 20px;
 	border-radius: 10px;
 	margin-top: 20px;
 }
 
-.custom-button:hover{
-	background:burlywood;
-	color:bisque;
+.custom-button:hover {
+	background: burlywood;
+	color: bisque;
 }
 
 .custom-delete {
