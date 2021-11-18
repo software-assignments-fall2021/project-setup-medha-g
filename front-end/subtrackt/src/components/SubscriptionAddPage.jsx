@@ -172,7 +172,7 @@ const SubscriptionAddPage = (props) => {
                 <button className="btn btn-primary" onClick={props.handleBack}>Close</button>
             </div>
             <div>
-                <ParseOption access_token={access_token} token={link_token} getAccessToken={getAccessToken} />
+                <ParseOption access_token={access_token} token={link_token} getAccessToken={getAccessToken} handleRender={props.handleRender} />
             </div>
         </div>
     );

@@ -7,7 +7,7 @@ const Header = () => {
         <div className="navbar">
             <Link className="navbar-nav" to="/landing">
             <img alt="Qries" src="../favicon.ico" width="15%"></img></Link>
-            <Link className="navbar-nav" to="/sub_list">Log In/Sign Up</Link>
+            <Link className="navbar-nav" to="/sub_list">Subscription List</Link>
             <LogoutPage />
         </div>
     )
