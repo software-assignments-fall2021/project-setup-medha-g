@@ -4,6 +4,7 @@ import Subscription from './Subscription';
 import SubcriptionAddPage from './SubscriptionAddPage';
 import useAsync from './use-async';
 import { useAuth } from './use-auth';
+import useRender from './use-render';
 
 /* Test variable and functions ===================================================================================
 
@@ -61,6 +62,7 @@ const SubscriptionList = () => {
     const [sublist, addList, deleteList, setList] = useSubList([]);
     const [seePage, toggleSeePage] = useState(false);
     const auth = useAuth();
+    const forceRender = useRender();
 
     const getDBList = useCallback(async () => {
         if (auth.jwt) {
@@ -73,7 +75,7 @@ const SubscriptionList = () => {
             auth.setJwt(res.data.user.token);
             setList(res.data.subscriptions);
         }
-    }, [auth, setList])
+    }, [auth, setList, forceRender.state])
 
     const dblist = useAsync(getDBList);
 
@@ -131,7 +133,7 @@ const SubscriptionList = () => {
         <div className="SubscriptionBox">
             <h3>Your Subscriptions</h3>
             <button className="btn btn-primary" onClick={handleSeePage} id="addButton">+</button>
-            {seePage ? <SubcriptionAddPage handleSubmit={handleAddSub} handleBack={handleUnseePage} /> : null}
+            {seePage ? <SubcriptionAddPage handleSubmit={handleAddSub} handleBack={handleUnseePage} handleRender={forceRender} /> : null}
             <ol className="SubscriptionList">
                 {renderList()}
             </ol>
