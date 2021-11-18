@@ -231,4 +231,11 @@ code {
 	bottom: 0;
 	width: 100%;
   }
+  input[type=text]:focus {
+	border: 2px solid #b4896c;
+  }
+
+  input[type=password]:focus {
+	border: 2px solid #b4896c;
+  }
   
