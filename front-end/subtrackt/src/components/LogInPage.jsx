@@ -50,8 +50,8 @@ const LogInPage = (props) => {
                     />
                 </div>
                 <br />
-                <button type="submit" className="btn btn-primary" onClick={handleSubmit}>Submit</button>
-                <button className="btn btn-primary" onClick={props.handleChange}>Signup</button>
+                <button type="submit" className="custom-button" onClick={handleSubmit}>Submit</button>
+                <button className="custom-button" onClick={props.handleChange}>Signup</button>
             </form>
             </div>
             {auth.errMessage ? <div>{auth.errMessage}</div> : null}
