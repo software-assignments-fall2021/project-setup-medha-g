@@ -42,7 +42,7 @@ const RegisterPage = (props) => {
                 <br />
                 <div className="mb-3">
                     <input
-                        type="text"
+                        type="password"
                         className="form-control"
                         value={password}
                         onChange={handlePassword}
