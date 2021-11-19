@@ -1,5 +1,5 @@
 import axios from 'axios';
-import React, { useState, useEffect, useCallback } from 'react';
+import React, { useState, useCallback } from 'react';
 import Subscription from './Subscription';
 import SubcriptionAddPage from './SubscriptionAddPage';
 import useAsync from './use-async';
@@ -8,7 +8,7 @@ import useRender from './use-render';
 
 /* Test variable and functions ===================================================================================
 
-*/
+
 
 function generateRandomSub() {
     return {
@@ -22,6 +22,8 @@ function generateRandomSub() {
         }
     }
 }
+
+*/
 
 // Test variable and functions END ===============================================================================
 
@@ -65,6 +67,7 @@ const SubscriptionList = () => {
     const forceRender = useRender();
 
     const getDBList = useCallback(async () => {
+        if(forceRender.state);
         if (auth.jwt) {
             const res = await axios.get("/api/users/getsublist", {
                 headers: {
