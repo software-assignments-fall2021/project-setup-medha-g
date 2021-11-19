@@ -1,17 +1,19 @@
 import React, { useState } from "react";
 import { useAuth } from "./use-auth";
-import {useHistory, useLocation} from "react-router-dom";
+import { useHistory, useLocation } from "react-router-dom";
+import useToggle from "./use-toggle";
 
 
 const RegisterPage = (props) => {
 
     const [username, setUsername] = useState("");
     const [password, setPassword] = useState("");
-    
+    const showpass = useToggle();
+
     let auth = useAuth();
     let history = useHistory();
     let location = useLocation();
-    let {from} = location.state || {fromt : {pathname:"/"}}
+    let { from } = location.state || { fromt: { pathname: "/" } }
 
     // Handlers ==================================================================================================
     const handleUsername = (event) => {
@@ -42,12 +44,13 @@ const RegisterPage = (props) => {
                 <br />
                 <div className="mb-3">
                     <input
-                        type="password"
+                        type={showpass.val ? "text" : "password"}
                         className="form-control"
                         value={password}
                         onChange={handlePassword}
                         placeholder="Password"
                     />
+                    Show Password: <input type="checkbox" onClick={showpass.trigger}/>
                 </div>
                 <br />
                 <button type="submit" className="btn btn-primary" onClick={handleSubmit}>Submit</button>
