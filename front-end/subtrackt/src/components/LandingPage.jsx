@@ -13,10 +13,11 @@ const LandingPage = () => {
             <div>
                 <header id="showcase">
                 <div class="box2 bounce-2"></div>
-                <div class="box3 bounce-3"></div>
+                
                     <h1>Welcome to SubTrackt</h1>
                         <p>SubTrackt is a subscription tracking and budgeting application.</p>
                         <a href="#section-a" class="button">Read More</a>
+                        <br></br><div class="box3 bounce-3"></div>
                 </header>
                 <section id="section-a">
                 <h2>Understand Where Your Money is Going!</h2>
