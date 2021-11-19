@@ -238,4 +238,39 @@ code {
   input[type=password]:focus {
 	border: 2px solid #b4896c;
   }
-  
+
+  .box2 {
+    align-self: flex-end;
+    animation-duration: 5s;
+    animation-iteration-count: infinite;
+    background: linear-gradient(70deg,#98ccb3,#b4896c);
+    height: 100px;
+    margin: 0 auto 0 auto;
+    transform-origin: bottom;
+    width: 100px;
+    border-radius: 5px;
+}
+.bounce-2 {
+    animation-name: bounce-2;
+    animation-timing-function: ease;
+}
+@keyframes bounce-2 {
+    0%   { transform: translateY(0); }
+    50%  { transform: translateY(-100px); }
+    100% { transform: translateY(0); }
+}
+
+.box3 {
+  width: 100px;
+  height: 100px;
+  background: linear-gradient(150deg,#98ccb3,#b4896c);
+  position: relative;
+  animation: bounce-3 5s infinite;
+  border-radius: 5px;
+}
+
+@keyframes bounce-3 {
+  0%  {left: 0px;}
+  50% {left: 200px;}
+  100% {left: 0px;}
+}
