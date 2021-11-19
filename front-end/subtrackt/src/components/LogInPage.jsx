@@ -1,6 +1,7 @@
 import React, { useState } from "react";
-import {useHistory, useLocation, Link} from "react-router-dom";
+import {useHistory, useLocation} from "react-router-dom";
 import { useAuth } from "./use-auth";
+import useToggle from "./use-toggle";
 
 import twitter from '../images/twitter-icon.png';
 import facebook from '../images/facebook-icon.png';
@@ -16,6 +17,7 @@ const LogInPage = (props) => {
 
     const [username, setUsername] = useState("");
     const [password, setPassword] = useState("");
+    const showpass = useToggle();
 
     // Handlers ==================================================================================================
     const handleUsername = (event) => {
@@ -47,13 +49,14 @@ const LogInPage = (props) => {
                 <br />
                 <div className="mb-3">
                     <input
-                        type="password"
+                        type={showpass.val ? "text" : "password"}
                         className="form-control"
                         value={password}
                         onChange={handlePassword}
                         placeholder="Password"
 
                     />
+                    Show Password: <input type="checkbox" onClick={showpass.trigger}/>
                 </div>
                 <br />
                 <button type="submit" className="custom-button" onClick={handleSubmit}>Submit</button>
