@@ -24,7 +24,7 @@
 }
 
 .navbar a:hover {
-	background: #926c68;
+	background: #aa807b;
 	color: black;
 }
 
@@ -83,7 +83,7 @@ body {
 }
 
 #showcase .button:hover {
-	background: #926c68;
+	background: #aa807b;
 	color: black;
 }
 
@@ -128,8 +128,8 @@ code {
 }
 
 .custom-button:hover {
-	background: burlywood;
-	color: bisque;
+	background: #aa807b;
+	color: black;
 }
 
 .custom-delete {
