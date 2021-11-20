@@ -89,6 +89,7 @@ body {
 
 #money{
   z-index: 1;
+  position: fixed;
 }
 
 #section-a {
@@ -366,6 +367,7 @@ code {
   top: 0px;
   background: linear-gradient(230deg,#98ccb3,#b4896c);
 }
+
 .bounce-2 {
     animation-name: bounce-2;
     animation-timing-function: ease;
@@ -376,17 +378,26 @@ code {
     100% { transform: translateY(0); }
 }
 
-.box3 {
-  width: 100px;
-  height: 100px;
-  background: linear-gradient(150deg,#98ccb3,#b4896c);
-  position: relative;
-  animation: bounce-3 5s infinite;
-  border-radius: 5px;
+.box {
+  align-self: flex-end;
+  animation-duration: 2s;
+  animation-iteration-count: 1;
+  background-image: url(../src/images/logo.png);
+  height: 200px;
+  margin: 0 auto 0 auto;
+  transform-origin: bottom;
+  width: 200px;
 }
-
-@keyframes bounce-3 {
-  0%  {left: 0px;}
-  50% {left: 200px;}
-  100% {left: 0px;}
+.bounce-6 {
+  animation-name: bounce-6;
+  animation-timing-function: ease;
+}
+@keyframes bounce-6 {
+  0%   { transform: scale(1,1)      translateY(0); }
+  10%  { transform: scale(1.1,.9)   translateY(0); }
+  30%  { transform: scale(.9,1.1)   translateY(-100px); }
+  50%  { transform: scale(1.05,.95) translateY(0); }
+  57%  { transform: scale(1,1)      translateY(-7px); }
+  64%  { transform: scale(1,1)      translateY(0); }
+  100% { transform: scale(1,1)      translateY(0); }
 }
