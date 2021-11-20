@@ -380,11 +380,12 @@ code {
 
 .box {
   align-self: flex-end;
-  animation-duration: 2s;
+  animation-duration: 2.5s;
   animation-iteration-count: 1;
   background-image: url(../src/images/logo.png);
-  height: 200px;
-  width: 200px;
+  background-size: 100px;
+  height: 100px;
+  width: 100px;
   margin: 0 auto 0 auto;
   transform-origin: bottom;
   
