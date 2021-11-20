@@ -31,7 +31,8 @@ const LandingPage = () => {
                 <div class="box2 bounce-2 pos16"></div>
                 <div class="box2 bounce-2 pos17"></div>
                 <div class="box2 bounce-2 pos18"></div>
-                <br></br><br></br><br></br>
+                
+                <br></br><br></br>
                 {/* <img src={logo} alt="logo" height="100px"/> */}
                 <div class="box bounce-6"></div>
                     <h1>Welcome to SubTrackt</h1>
@@ -46,6 +47,7 @@ const LandingPage = () => {
                         View all of your subscriptions via your credit card transaction history, cancel any unwanted subscriptions, and keep track of your spending with SubTrackt.
                     </div>
                 </section></div>
+                
             </div>
             <div class="footer-dark">
         <footer>

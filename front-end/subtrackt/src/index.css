@@ -83,13 +83,13 @@ body {
 }
 
 #showcase .button:hover {
-	background: burlywood;
-	color: bisque;
+	background: #926c68;
+	color: black;
 }
 
 #money{
-  z-index: 1;
-  position: fixed;
+  z-index: 20;
+  position: relative;
 }
 
 #section-a {
@@ -97,7 +97,7 @@ body {
 	background: #98ccb3;
 	color: white;
 	text-align: center;
-  z-index: 1;
+  position: relative;
 }
 
 #section-a .box-1 {
@@ -384,9 +384,10 @@ code {
   animation-iteration-count: 1;
   background-image: url(../src/images/logo.png);
   height: 200px;
+  width: 200px;
   margin: 0 auto 0 auto;
   transform-origin: bottom;
-  width: 200px;
+  
 }
 .bounce-6 {
   animation-name: bounce-6;
