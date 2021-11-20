@@ -41,11 +41,12 @@ const LandingPage = () => {
                 </header>
                 <div className="money">
                 <section id="section-a">
-                <h2>Understand Where Your Money is Going!</h2>
-                <img src={graphGIF} alt="Graph Animation" />
+                <br></br><br></br>
+                <h2>Understand Where Your Money is Going!</h2><br></br><br></br>
+                <img src={graphGIF} alt="Graph Animation" /><br></br><br></br>
                     <div class="box1">
                         View all of your subscriptions via your credit card transaction history, cancel any unwanted subscriptions, and keep track of your spending with SubTrackt.
-                    </div>
+                    </div><br></br><br></br>
                 </section></div>
                 
             </div>
