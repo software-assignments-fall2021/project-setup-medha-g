@@ -35,9 +35,9 @@ const LandingPage = () => {
                 <br></br><br></br>
                 {/* <img src={logo} alt="logo" height="100px"/> */}
                 <div class="box bounce-6"></div>
-                    <h1>Welcome to SubTrackt</h1>
+                    <h1>Welcome to SubTrackt!</h1>
                         <p>SubTrackt is a subscription tracking and budgeting application.</p>
-                        <a href="#section-a" class="button">Read More</a>
+                        <a href="#section-a" class="button">Learn More</a>
                 </header>
                 <div className="money">
                 <section id="section-a">
