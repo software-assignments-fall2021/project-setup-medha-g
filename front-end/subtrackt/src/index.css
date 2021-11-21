@@ -10,6 +10,7 @@
 	position: fixed; /* Set the navbar to fixed position */
 	top: 0;
 	width: 100%;
+  z-index: 1
 }
 
 .navbar a {
@@ -23,7 +24,7 @@
 }
 
 .navbar a:hover {
-	background: #926c68;
+	background: #aa807b;
 	color: black;
 }
 
@@ -82,8 +83,13 @@ body {
 }
 
 #showcase .button:hover {
-	background: burlywood;
-	color: bisque;
+	background: #aa807b;
+	color: black;
+}
+
+#money{
+  z-index: 20;
+  position: relative;
 }
 
 #section-a {
@@ -91,6 +97,7 @@ body {
 	background: #98ccb3;
 	color: white;
 	text-align: center;
+  position: relative;
 }
 
 #section-a .box-1 {
@@ -121,8 +128,8 @@ code {
 }
 
 .custom-button:hover {
-	background: burlywood;
-	color: bisque;
+	background: #aa807b;
+	color: black;
 }
 
 .custom-delete {
@@ -238,4 +245,161 @@ code {
   input[type=password]:focus {
 	border: 2px solid #b4896c;
   }
+
+  .box2 {
+    align-self: flex-end;
+    animation-duration: 5s;
+    animation-iteration-count: infinite;
+    
+    height: 100px;
+    
+    transform-origin: bottom;
+    width: 100px;
+    border-radius: 5px;
+
+}
+.pos1{
+  position: absolute;
+  left: 50px;
+  top: 600px;
+  background: linear-gradient(70deg,#98ccb3,#b4896c);
+}
+.pos2{
+  position: absolute;
+  left: 150px;
+  top: 500px;
+  background: linear-gradient(70deg,#98ccb3,#b4896c);
+}
+.pos3{
+  position: absolute;
+  left: 150px;
+  top: 300px;
+  background: linear-gradient(70deg,#98ccb3,#b4896c);
+}
+.pos4{
+  position: absolute;
+  left: 150px;
+  top: 700px;
+  background: linear-gradient(70deg,#98ccb3,#b4896c);
+}
+.pos5{
+  position: absolute;
+  left: 50px;
+  top: 400px;
+  background: linear-gradient(70deg,#98ccb3,#b4896c);
+}
+.pos6{
+  position: absolute;
+  left: 50px;
+  top: 200px;
+  background: linear-gradient(70deg,#98ccb3,#b4896c);
+}
+.pos7{
+  position: absolute;
+  left: 150px;
+  top: 100px;
+  background: linear-gradient(70deg,#98ccb3,#b4896c);
+}
+.pos8{
+  position: absolute;
+  left: 50px;
+  top: 800px;
+  background: linear-gradient(70deg,#98ccb3,#b4896c);
+}
+.pos9{
+  position: absolute;
+  left: 50px;
+  top: 0px;
+  background: linear-gradient(70deg,#98ccb3,#b4896c);
+}
+
+.pos10{
+  position: absolute;
+  right: 50px;
+  top: 600px;
+  background: linear-gradient(230deg,#98ccb3,#b4896c);
+}
+.pos11{
+  position: absolute;
+  right: 150px;
+  top: 500px;
+  background: linear-gradient(230deg,#98ccb3,#b4896c);
+}
+.pos12{
+  position: absolute;
+  right: 150px;
+  top: 300px;
+  background: linear-gradient(230deg,#98ccb3,#b4896c);
+}
+.pos13{
+  position: absolute;
+  right: 150px;
+  top: 700px;
+  background: linear-gradient(230deg,#98ccb3,#b4896c);
+}
+.pos14{
+  position: absolute;
+  right: 50px;
+  top: 400px;
+  background: linear-gradient(230deg,#98ccb3,#b4896c);
+}
+.pos15{
+  position: absolute;
+  right: 50px;
+  top: 200px;
+  background: linear-gradient(230deg,#98ccb3,#b4896c);
+}
+.pos16{
+  position: absolute;
+  right: 150px;
+  top: 100px;
+  background: linear-gradient(230deg,#98ccb3,#b4896c);
+}
+.pos17{
+  position: absolute;
+  right: 50px;
+  top: 800px;
+  background: linear-gradient(230deg,#98ccb3,#b4896c);
+}
+.pos18{
+  position: absolute;
+  right: 50px;
+  top: 0px;
+  background: linear-gradient(230deg,#98ccb3,#b4896c);
+}
+
+.bounce-2 {
+    animation-name: bounce-2;
+    animation-timing-function: ease;
+}
+@keyframes bounce-2 {
+    0%   { transform: translateY(0); }
+    50%  { transform: translateY(-100px); }
+    100% { transform: translateY(0); }
+}
+
+.box {
+  align-self: flex-end;
+  animation-duration: 2.5s;
+  animation-iteration-count: 1;
+  background-image: url(../src/images/logo.png);
+  background-size: 100px;
+  height: 100px;
+  width: 100px;
+  margin: 0 auto 0 auto;
+  transform-origin: bottom;
   
+}
+.bounce-6 {
+  animation-name: bounce-6;
+  animation-timing-function: ease;
+}
+@keyframes bounce-6 {
+  0%   { transform: scale(1,1)      translateY(0); }
+  10%  { transform: scale(1.1,.9)   translateY(0); }
+  30%  { transform: scale(.9,1.1)   translateY(-100px); }
+  50%  { transform: scale(1.05,.95) translateY(0); }
+  57%  { transform: scale(1,1)      translateY(-7px); }
+  64%  { transform: scale(1,1)      translateY(0); }
+  100% { transform: scale(1,1)      translateY(0); }
+}
