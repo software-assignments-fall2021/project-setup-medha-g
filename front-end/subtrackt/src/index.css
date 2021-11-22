@@ -137,6 +137,11 @@ code {
 	height: 60px;
 }
 
+.custom-delete:hover{
+  background: #aa807b;
+  cursor: pointer;
+}
+
 .footer-dark {
 	padding:50px 0;
 	color:#f0f9ff;

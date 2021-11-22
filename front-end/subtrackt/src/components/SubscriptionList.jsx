@@ -40,6 +40,7 @@ function useSubList(initList) {
 
     const addSublist = sub => {
         setSublist(prev => {
+        
             return [...prev, sub]
         });
     }
@@ -52,6 +53,11 @@ function useSubList(initList) {
         });
     }
 
+    // const categoriesSubList = sub =>{ //TO DO: use categories to map a frequency list and create graphs
+    //     sub.map(sub => (key=sub.industry));
+    // }
+
+    // console.log("sublist: ",sublist[0]);
     return [sublist, addSublist, deleteSublist, setSublist];
 }
 
