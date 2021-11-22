@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import {useHistory, useLocation} from "react-router-dom";
+import { useHistory, useLocation } from "react-router-dom";
 import { useAuth } from "./use-auth";
 import useToggle from "./use-toggle";
 
@@ -14,7 +14,7 @@ const LogInPage = (props) => {
     let location = useLocation();
     let auth = useAuth();
 
-    let {from} = location.state || {fromt : {pathname:"/"}}
+    let { from } = location.state || { fromt: { pathname: "/" } }
 
     const [username, setUsername] = useState("");
     const [password, setPassword] = useState("");
@@ -36,39 +36,39 @@ const LogInPage = (props) => {
     return (
         <div className="Login">
             <div>
-            <form className="custom-form">
-                <label>Log In:</label>
-                <div className="mb-3">
-                    <input
-                        type="text"
-                        className="form-control"
-                        value={username}
-                        onChange={handleUsername}
-                        placeholder="Username"
-                    />
-                </div>
-                <br />
-                <div className="mb-3">
-                    <input
-                        type={showpass.val ? "text" : "password"}
-                        className="form-control"
-                        value={password}
-                        onChange={handlePassword}
-                        placeholder="Password"
+                <form className="custom-form">
+                    <label>Log In:</label>
+                    <div className="mb-3">
+                        <input
+                            type="text"
+                            className="form-control"
+                            value={username}
+                            onChange={handleUsername}
+                            placeholder="Username"
+                        />
+                    </div>
+                    <br />
+                    <div className="mb-3">
+                        <input
+                            type={showpass.val ? "text" : "password"}
+                            className="form-control"
+                            value={password}
+                            onChange={handlePassword}
+                            placeholder="Password"
 
-                    />
-                    Show Password: <input type="checkbox" onClick={showpass.trigger}/>
-                </div>
-                <br />
-                <button type="submit" className="custom-button" onClick={handleSubmit}>Submit</button>
-                <button className="custom-button" onClick={props.handleChange}>Signup</button>
-            </form>
+                        />
+                        Show Password: <input type="checkbox" onClick={showpass.trigger} />
+                    </div>
+                    <br />
+                    <button type="submit" className="custom-button" onClick={handleSubmit}>Submit</button>
+                    <button className="custom-button" onClick={props.handleChange}>Signup</button>
+                </form>
             </div>
-            <div class="footer-dark footer-login">
+            <div className="footer-dark footer-login">
                 <footer>
-                    <div class="container">
-                        <div class="row">
-                            <div class="col-sm-6 col-md-3 item">
+                    <div className="container">
+                        <div className="row">
+                            <div className="col-sm-6 col-md-3 item">
                                 <h3>Services</h3>
                                 <ul>
                                     <li><a href="#">Development</a></li>
@@ -76,7 +76,7 @@ const LogInPage = (props) => {
                                     <li><a href="#">FAQ</a></li>
                                 </ul>
                             </div>
-                            <div class="col-sm-6 col-md-3 item">
+                            <div className="col-sm-6 col-md-3 item">
                                 <h3>About</h3>
                                 <ul>
                                     <li><a href="#">Company</a></li>
@@ -84,17 +84,37 @@ const LogInPage = (props) => {
                                     <li><a href="#">Careers</a></li>
                                 </ul>
                             </div>
-                            <div class="col-md-6 item text">
+                            <div className="col-md-6 item text">
                                 <h3>SubTrackt</h3>
                                 <p>SubTrackt is a Web Application that allows users to keep track of their subscriptions. Subscriptions are either populated via credit card transaction history or via manual entering. Users also have the opportunity to cancel and add subscriptions that they are interested in through SubTrackt and they can evaluate exactly where each of their money is going.</p>
                             </div>
-                            <div class="col item social"><a href="#"><i class="icon ion-social-facebook"><img src={facebook} height="20px"></img></i></a><a href="#"><i class="icon ion-social-twitter"><img src={twitter} height="20px"></img></i></a><a href="#"><i class="icon ion-social-snapchat"><img src={linkedin} height="20px"></img></i></a><a href="#"><i class="icon ion-social-instagram"><img src={instagram} height="20px"></img></i></a></div>
+                            <div className="col item social">
+                                <a href="#">
+                                    <i className="icon ion-social-facebook">
+                                        <img src={facebook} height="20px" alt="" />
+                                    </i>
+                                </a>
+                                <a href="#">
+                                    <i className="icon ion-social-twitter">
+                                        <img src={twitter} height="20px" alt="" />
+                                    </i>
+                                </a>
+                                <a href="#">
+                                    <i className="icon ion-social-snapchat">
+                                        <img src={linkedin} height="20px" alt="" />
+                                    </i>
+                                </a>
+                                <a href="#">
+                                    <i className="icon ion-social-instagram">
+                                        <img src={instagram} height="20px" alt="" />
+                                    </i>
+                                </a>
+                            </div>
                         </div>
-                        <p class="copyright">SubTrackt © 2021</p>
+                        <p className="copyright">SubTrackt © 2021</p>
                     </div>
                 </footer>
             </div>
-
             {auth.errMessage ? <div>{auth.errMessage}</div> : null}
         </div>
 
