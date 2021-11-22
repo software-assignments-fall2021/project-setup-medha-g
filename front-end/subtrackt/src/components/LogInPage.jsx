@@ -8,6 +8,7 @@ import facebook from '../images/facebook-icon.png';
 import linkedin from '../images/linkedin-icon.png';
 import instagram from '../images/instagram-icon.png';
 
+
 const LogInPage = (props) => {
     let history = useHistory();
     let location = useLocation();

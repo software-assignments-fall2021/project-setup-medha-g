@@ -137,6 +137,11 @@ code {
 	height: 60px;
 }
 
+.custom-delete:hover{
+  background: #aa807b;
+  cursor: pointer;
+}
+
 .footer-dark {
 	padding:50px 0;
 	color:#f0f9ff;
@@ -238,6 +243,12 @@ code {
 	bottom: 0;
 	width: 100%;
   }
+
+  .footer-sublist{
+    bottom: 0;
+    width: 100%;
+    }
+
   input[type=text]:focus {
 	border: 2px solid #b4896c;
   }
@@ -402,4 +413,12 @@ code {
   57%  { transform: scale(1,1)      translateY(-7px); }
   64%  { transform: scale(1,1)      translateY(0); }
   100% { transform: scale(1,1)      translateY(0); }
+}
+
+.SubscriptionBox{
+  background-color:#f2fff9;
+	background-size: cover;
+	padding-bottom: 3000px;
+  height: 600px;
+  z-index: 1000;
 }

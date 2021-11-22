@@ -110,12 +110,14 @@ const SubscriptionAddPage = (props) => {
         .then(function (company) {
             console.log('Description: ', company.description);
             console.log('Name: ', company.name);
+            console.log('Industry: ', company.category.subIndustry)
         
             props.handleSubmit({
                 image: company.logo,
                 title: company.name,
                 description: company.description,
-                plan: plan            
+                plan: plan,
+                industry: company.category.industry            
             })
             
         })
@@ -125,7 +127,8 @@ const SubscriptionAddPage = (props) => {
                 image: placeholderImage, 
                 title: givenDomain,
                 description: givenDomain,
-                plan: plan
+                plan: plan,
+                industry: "unknown"
             })
           });
         
@@ -168,8 +171,8 @@ const SubscriptionAddPage = (props) => {
                 </select>
             </div>
             <div>
-                <button className="btn btn-primary" onClick={handleSubmit}>Submit</button>
-                <button className="btn btn-primary" onClick={props.handleBack}>Close</button>
+                <button className="custom-button" onClick={handleSubmit}>Submit</button>
+                <button className="custom-button" onClick={props.handleBack}>Close</button>
             </div>
             <div>
                 <ParseOption access_token={access_token} token={link_token} getAccessToken={getAccessToken} handleRender={props.handleRender} />
