@@ -5,6 +5,8 @@ import Header from "./Header";
 import { Route, Switch, BrowserRouter as Router } from "react-router-dom";
 import { ProvideAuth } from "./use-auth";
 import ProtectPage from './ProtectPage'
+import { Redirect } from 'react-router';
+
 
 function App() {
   return (
@@ -19,6 +21,10 @@ function App() {
 
             <Route path="/sub_list">
               <ProtectPage />
+            </Route>
+
+            <Route path="/">
+                  <Redirect to="/landing"></Redirect>
             </Route>
           </Switch>
         </Router>
