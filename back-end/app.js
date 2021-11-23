@@ -30,6 +30,12 @@ app.use(
 );
 if (!isProduction) app.use(errorHandler());
 
+app.use((err, req, res, next) => {
+	if(err && err.name == 'UnauthorizedError') {
+		res.status(401).send('Invalid Token');
+	}
+})
+
 // connect to temporary mongodb ran on local machine
 mongoose.connect(DB_ADDR);
 if (!isProduction) mongoose.set("debug", true);

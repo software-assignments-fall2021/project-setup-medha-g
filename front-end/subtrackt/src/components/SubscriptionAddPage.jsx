@@ -75,7 +75,6 @@ const SubscriptionAddPage = (props) => {
         }
 
         const res = await axios.post('/api/plaid/get_access_token', { public_token: public_token }, config);
-
         setAccess(res.data.access_token);
     }
 

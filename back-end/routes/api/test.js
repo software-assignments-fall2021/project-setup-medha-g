@@ -21,7 +21,7 @@ router.get("/checkAuthorize", auth.optional, (req, res) => {
 		res.json({ message: "If you see this mesasage you are authorized." });
 	} catch (err) {
 		console.log(err);
-		res.json({ message: "If you see this mesasage you are not authorized." });
+		res.status(401).json({ message: "If you see this mesasage you are not authorized." });
 	}
 });
 

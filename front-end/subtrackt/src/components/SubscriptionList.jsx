@@ -67,7 +67,8 @@ const SubscriptionList = () => {
     const forceRender = useRender();
 
     const getDBList = useCallback(async () => {
-        if(forceRender.state);
+        console.log("Getting list from db");
+        if (forceRender.state);
         if (auth.jwt) {
             const res = await axios.get("/api/users/getsublist", {
                 headers: {
@@ -90,16 +91,26 @@ const SubscriptionList = () => {
             headers: {
                 Authorization: `Token ${auth.jwt}`
             }
-        }).then(res => auth.setJwt(res.data.user.token));
-        addList(sub);
+        }).then(res => {
+            auth.setJwt(res.data.user.token);
+            addList(sub);
+        }).catch(err => {
+            if (err.status === 401) auth.signout();
+            alert(`Failed to add subscription: ${err.message}`);
+        });
     }
     const handleDeleteSub = index => {
         axios.post("/api/users/removesubscriptioninfo", { index: index }, {
             headers: {
                 Authorization: `Token ${auth.jwt}`
             }
-        }).then(res => auth.setJwt(res.data.user.token));
-        deleteList(index);
+        }).then(res => {
+            auth.setJwt(res.data.user.token);
+            deleteList(index);
+        }).catch(err => {
+            if (err.status === 401) auth.signout();
+            alert(`Failed to add subscription: ${err.message}`);
+        });
     }
     const handleSeePage = () => {
         toggleSeePage(true);

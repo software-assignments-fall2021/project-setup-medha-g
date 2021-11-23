@@ -75,7 +75,7 @@ router.post('/login', auth.optional, (req, res, next) => {
             }
 
             // authentication err
-            return res.status(400).json(info)
+            return res.status(500).json(info)
         }
     )(req, res, next)
 })
@@ -89,7 +89,7 @@ router.post('/addsubscriptioninfo', auth.required, (req, res, next) => {
 
     Users.findById(_id).then((user) => {
         if (!user) {
-            return res.status(400).json({error: "user not found"});
+            return res.status(404).json({err: "User not found"});
         }
 
         user.addSubscription(sub_info)
@@ -99,6 +99,8 @@ router.post('/addsubscriptioninfo', auth.required, (req, res, next) => {
                 user: user.generateAuthRes(),
             })
         })
+    }).catch(err => {
+        return res.status(500).json({err: "User failed to save"});
     })
 })
 
@@ -110,7 +112,7 @@ router.post('/removesubscriptioninfo', auth.required, (req, res, next) => {
 
     Users.findById(_id).then((user) => {
         if(!user) {
-            return res.status(400).json({error: "user not found"});
+            return res.status(404).json({err: "User not found"});
         }
 
         user.deleteSubscription(index);
@@ -119,6 +121,8 @@ router.post('/removesubscriptioninfo', auth.required, (req, res, next) => {
                 message: `Deleted subscription`,
                 user: user.generateAuthRes()
             })
+        }).catch(err => {
+            return res.status(500).json({err: "User failed to delete"})
         });
     })
 })
@@ -131,14 +135,14 @@ router.get('/getsublist', auth.required, (req, res, next) => {
 
     Users.findById(_id).then((user) => {
         if (!user) {
-            return res.sendStatus(400)
+            return res.status(404).json({err: "User not found"});
         }
 
         return res.json({
             subscriptions: user.subscriptions,
             user: user.generateAuthRes(),
         })
-    })
+    }).catch(err => res.status(500).json({err: "Failed to find subscription list"}))
 })
 
 // return current user
@@ -149,7 +153,7 @@ router.get('/current', auth.required, (req, res, next) => {
 
     return Users.findById(_id).then((user) => {
         if (!user) {
-            return res.sendStatus(400)
+            return res.status(404).json({err: "User not found"});
         }
 
         return res.json({ user: user.generateAuthRes() })
@@ -165,7 +169,7 @@ router.delete('/deleteaccount', auth.required, (req, res, next) => {
     // invalidate token
 
     Users.deleteOne({ username: username }, function (err) {
-        if (err) return res.json({ message: 'deleteOne() failed' })
+        if (err) return res.status(500).json({ message: 'deleteOne() failed' })
         else {
             return res.json({ message: 'Success' })
         }

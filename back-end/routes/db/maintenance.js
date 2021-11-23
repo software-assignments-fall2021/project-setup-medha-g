@@ -15,11 +15,10 @@ router.delete('/deleteallusers', auth.optional, async (req, res, next) => {
     const admin = await Users.findById(_id)
     if (!admin.isAdmin)
         return res
-            .status(400)
-            .json({ error: 'Require admin user for this action.' })
+            .status(400).json({ error: 'Require admin user for this action.' })
 
     Users.deleteMany({}, function (err) {
-        if (err) return res.json({ messasge: 'deleteMany() failed' })
+        if (err) return res.status(500).json({ messasge: 'deleteMany() failed' })
         else {
             return res.json({ messasge: 'Sucess' })
         }
