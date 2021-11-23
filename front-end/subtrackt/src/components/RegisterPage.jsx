@@ -61,11 +61,11 @@ const RegisterPage = (props) => {
                 <button type="submit" className="custom-button" onClick={handleSubmit}>Submit</button>
                 <br/><br/><p className="signup_login_link">Already have an account? <a href="#" onClick={props.handleChange}>Sign in</a></p><br/><br/>
             </form>
-            <div class="footer-dark footer-login">
+            <div className="footer-dark footer-login">
                 <footer>
-                    <div class="container">
-                        <div class="row">
-                            <div class="col-sm-6 col-md-3 item">
+                    <div className="container">
+                        <div className="row">
+                            <div className="col-sm-6 col-md-3 item">
                                 <h3>Services</h3>
                                 <ul>
                                     <li><a href="#">Development</a></li>
@@ -73,7 +73,7 @@ const RegisterPage = (props) => {
                                     <li><a href="#">FAQ</a></li>
                                 </ul>
                             </div>
-                            <div class="col-sm-6 col-md-3 item">
+                            <div className="col-sm-6 col-md-3 item">
                                 <h3>About</h3>
                                 <ul>
                                     <li><a href="#">Company</a></li>
@@ -81,34 +81,34 @@ const RegisterPage = (props) => {
                                     <li><a href="#">Careers</a></li>
                                 </ul>
                             </div>
-                            <div class="col-md-6 item text">
+                            <div className="col-md-6 item text">
                                 <h3>SubTrackt</h3>
                                 <p>SubTrackt is a Web Application that allows users to keep track of their subscriptions. Subscriptions are either populated via credit card transaction history or via manual entering. Users also have the opportunity to cancel and add subscriptions that they are interested in through SubTrackt and they can evaluate exactly where each of their money is going.</p>
                             </div>
-                            <div class="col item social">
+                            <div className="col item social">
                                 <a href="#">
-                                    <i class="icon ion-social-facebook">
+                                    <i className="icon ion-social-facebook">
                                         <img src={facebook} height="20px" alt="" />
                                     </i>
                                 </a>
                                 <a href="#">
-                                    <i class="icon ion-social-twitter">
+                                    <i className="icon ion-social-twitter">
                                         <img src={twitter} height="20px" alt="" />
                                     </i>
                                 </a>
                                 <a href="#">
-                                    <i class="icon ion-social-snapchat">
+                                    <i className="icon ion-social-snapchat">
                                         <img src={linkedin} height="20px" alt="" />
                                     </i>
                                 </a>
                                 <a href="#">
-                                    <i class="icon ion-social-instagram">
+                                    <i className="icon ion-social-instagram">
                                         <img src={instagram} height="20px" alt="" />
                                     </i>
                                 </a>
                             </div>
                         </div>
-                        <p class="copyright">SubTrackt © 2021</p>
+                        <p className="copyright">SubTrackt © 2021</p>
                     </div>
                 </footer>
             </div>

@@ -8,7 +8,7 @@ const LogoutPage = () => {
   let auth = useAuth();
 
   return auth.user ? (
-    <button className="navbar-nav" onClick={() => {
+    <button className="column login-text" onClick={() => {
       auth.signout(() => history.push('/'));
     }}>
       Logout

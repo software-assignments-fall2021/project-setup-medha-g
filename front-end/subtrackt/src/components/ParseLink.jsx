@@ -11,7 +11,7 @@ const ParseLink = props => {
 
     return (
         <PlaidLink 
-        className="plaid-button" 
+        className="plaid-button custom-button" 
         token={props.token ? props.token : ''} 
         onExit={onExit} 
         onSuccess={onSuccess} 
