@@ -59,7 +59,7 @@ const RegisterPage = (props) => {
                 </div>
                 <br />
                 <button type="submit" className="custom-button" onClick={handleSubmit}>Submit</button>
-                <button className="custom-button" onClick={props.handleChange}>Signin</button>
+                <br/><br/><p className="signup_login_link">Already have an account? <a href="#" onClick={props.handleChange}>Sign in</a></p><br/><br/>
             </form>
             <div class="footer-dark footer-login">
                 <footer>
