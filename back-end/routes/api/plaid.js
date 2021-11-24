@@ -44,8 +44,8 @@ router.get("/create_link_token", auth.required, async (req, res) => {
         const response = await client.linkTokenCreate(request);
         return res.json(response.data);
     } catch (error) {
-        console.log("create_link_token err: ", error.message);
-        return res.status(400).json({err: error.response.data});
+        if(error.response) return res.status(error.response.status).json({err: error.response.data});
+        else res.status(500).json({error: error.message});
     }
 })
 
@@ -59,7 +59,8 @@ router.post("/get_access_token", auth.required, async (req, res) => {
         const item_id = response.data.item_id;
         return res.json({access_token: response.data.access_token, item_id: item_id});
     } catch (error) {
-        return res.status(400).json({err: error.message});
+        if(error.response) return res.status(error.response.status).json({err: error.response.data});
+        else res.status(500).json({error: error.message});
     }
 })
 
@@ -101,8 +102,7 @@ router.get("/transaction", auth.required, async (req,res) => {
 
         return res.json(transactions);
     } catch (error) {
-        console.log(error);
-        return res.status(400).json({err: error.message});
+        return res.status(500).json({err: error.message});
     }
 
 })
@@ -193,8 +193,6 @@ router.get('/parse', auth.required, async (req, res) => {
          */
         const tranMap = {}
 
-        // loop thru transactions array
-        // how do i get user?
         const user = await Users.findById(_id)
         for (const curTran in transactions) {
             // parse transactions -- find those with subscription category
@@ -265,7 +263,7 @@ router.get('/parse', auth.required, async (req, res) => {
 
     } catch (error) {
         console.log(error)
-        return res.status(400).json({ err: error.message })
+        return res.status(500).json({ err: error.message })
     }
 })
 

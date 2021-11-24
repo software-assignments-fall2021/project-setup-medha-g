@@ -95,6 +95,6 @@ export const useProvideAuth = () => {
     signin,
     signup,
     signout,
-    errMessage,
+    errMessage
   };
 };

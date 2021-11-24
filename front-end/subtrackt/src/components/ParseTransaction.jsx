@@ -7,12 +7,17 @@ const ParseTransactions = props => {
     const auth = useAuth();
 
     const handleParse = () => {
-        console.log("jwt token is", auth.jwt)
-        axios.get("/api/plaid/parse", {headers: {
-            access_token: props.token, 
-            Authorization: `Token ${auth.jwt}`
-        }}).then(res => {
+        console.log("parsing transaction")
+        axios.get("/api/plaid/parse", {
+            headers: {
+                access_token: props.token,
+                Authorization: `Token ${auth.jwt}`
+            }
+        }).then(res => {
             props.handleRender.update();
+        }).catch(err => {
+            if (err.status === 401) auth.signout();
+            alert(`Failed to parse subscription: ${err.message}`);
         })
     }
 
