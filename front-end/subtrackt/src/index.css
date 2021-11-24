@@ -422,3 +422,9 @@ code {
   height: 600px;
   z-index: 1000;
 }
+
+.signup_login_link{
+  text-decoration: none;
+  text-align: center;
+  font-size: small;
+}

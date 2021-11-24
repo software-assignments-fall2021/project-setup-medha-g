@@ -18,7 +18,7 @@ const ParseTransactions = props => {
 
 
     return (
-        <button className="btn btn-primary" onClick={handleParse} >Parse Transactions</button>
+        <button className="custom-button" onClick={handleParse} >Parse Transactions</button>
     )
 }
 
