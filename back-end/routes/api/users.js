@@ -75,7 +75,7 @@ router.post('/login', auth.optional, (req, res, next) => {
             }
 
             // authentication err
-            return res.status(500).json(info)
+            return res.status(401).json(info)
         }
     )(req, res, next)
 })
