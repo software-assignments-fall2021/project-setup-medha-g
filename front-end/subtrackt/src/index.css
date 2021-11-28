@@ -441,3 +441,27 @@ input[type="password"]:focus {
   text-align: center;
   font-size: small;
 }
+
+.logout-button{
+    background: none!important;
+    border: none;
+    padding: 0!important;
+    cursor: pointer;
+    size: 100%;
+    float: left;
+    display: block;
+    color: #f2f2f2;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+    float: left;
+    width: 200px;
+    height: 55px;
+}
+
+.logout-button:hover{
+  background: #aa807b !important;
+  color: black;
+
+}
+
