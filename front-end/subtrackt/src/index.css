@@ -4,6 +4,7 @@
   margin: 0;
   padding: 0;
 }
+
 .navbar {
   overflow: hidden;
   background-color: #b4896c;
@@ -483,5 +484,17 @@ input[type="password"]:focus {
   background: #aa807b !important;
   color: black;
 
+}
+
+.button-link {
+  background: none!important;
+  border: none;
+  padding: 0!important;
+  /*optional*/
+  font-family: arial, sans-serif;
+  /*input has OS specific font-family*/
+  color: #069;
+  text-decoration: underline;
+  cursor: pointer;
 }
 

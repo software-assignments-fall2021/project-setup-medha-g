@@ -61,7 +61,7 @@ const LogInPage = (props) => {
                     <button type="submit" className="custom-button" onClick={handleSubmit}>Submit</button>
                     <br/><br/>
     
-                    <p className="signup_login_link">Don't have an account? <a href="#" onClick={props.handleChange}>Sign up</a></p><br/><br/>
+                    <p className="signup_login_link">Don't have an account? <button className="button-link" onClick={props.handleChange}>Sign up</button></p><br/><br/>
                 </form>
             </div>
             <Footer/>

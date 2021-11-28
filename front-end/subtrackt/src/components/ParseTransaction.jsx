@@ -33,7 +33,7 @@ const ParseTransactions = props => {
         } else {
             if(veil.val) veil.trigger();
         }
-    }, [parse.status])
+    }, [parse, veil])
 
     const handleParse = () => {
         console.log("parsing transaction")
