@@ -445,7 +445,6 @@ input[type="password"]:focus {
 .logout-button{
     background: none!important;
     border: none;
-    padding: 0!important;
     cursor: pointer;
     size: 100%;
     float: left;
@@ -454,12 +453,33 @@ input[type="password"]:focus {
     text-align: center;
     padding: 14px 16px;
     text-decoration: none;
-    float: left;
     width: 200px;
     height: 55px;
 }
 
 .logout-button:hover{
+  background: #aa807b !important;
+  color: black;
+
+}
+
+.plaid-button{
+    background: #926c68!important;
+    border: black;
+    cursor: pointer;
+    size: 100%;
+    float: center;
+    display: center;
+    color: #f2f2f2;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+    width: 200px;
+    height: 55px;
+    border-radius: 10px;
+}
+
+.plaid-button:hover{
   background: #aa807b !important;
   color: black;
 
