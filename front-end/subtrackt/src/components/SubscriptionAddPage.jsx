@@ -135,7 +135,7 @@ const SubscriptionAddPage = (props) => {
     }
 
     return (
-        <div className="custom-form ">
+        <div className="custom-form pop-up">
             <label>Subscription URL:</label>
             <div className="mb-3">
                 <input
@@ -151,28 +151,28 @@ const SubscriptionAddPage = (props) => {
             <div className="input-group mb-3">
                 <span className="input-group-text">$</span>
                 <input
-                    type="text"
+                    type="number"
                     value={plan.price}
                     className="form-control"
                     onChange={handlePrice}
                 />
                 <span className="input-group-text">/</span>
                 <input
-                    type="text"
+                    type="number"
                     value={plan.time_quantity}
                     className="form-control"
                     onChange={handleTimeQuantity}
                 />
                 <select className="form-select" onChange={handleTimeUnit}>
-                    <option value="day">day</option>
-                    <option value="month">month</option>
-                    <option value="year">year</option>
+                    <option value="day">day(s)</option>
+                    <option value="month">month(s)</option>
+                    <option value="year">year(s)</option>
                 </select>
             </div>
             <div>
                 <button className="custom-button" onClick={handleSubmit}>Submit</button>
                 <button className="custom-button" onClick={props.handleBack}>Close</button>
-            </div>
+            </div><br/>
             <div>
                 <ParseOption access_token={access_token} token={link_token} getAccessToken={getAccessToken} handleRender={props.handleRender} />
             </div>
