@@ -11,7 +11,7 @@ describe('Server', function () {
     this.timeout(5000);
 
     before(function (done) {
-        server = app.listen(process.env.PORT, function (err) {
+        server = app.listen(3000, function (err) {
             if (err) {
                 return done(err)
             }
