@@ -55,7 +55,7 @@ const RegisterPage = (props) => {
                 </div>
                 <br />
                 <button type="submit" className="custom-button" onClick={handleSubmit}>Submit</button>
-                <br/><br/><p className="signup_login_link">Already have an account? <a href="#" onClick={props.handleChange}>Sign in</a></p><br/><br/>
+                <br/><br/><p className="signup_login_link">Already have an account? <button className="button-link" onClick={props.handleChange}>Sign in</button></p><br/><br/>
             </form>
             <Footer/>
             {auth.errMessage ? <div>{auth.errMessage}</div> : null}

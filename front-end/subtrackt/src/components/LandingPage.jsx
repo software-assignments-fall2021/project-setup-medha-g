@@ -1,6 +1,5 @@
 import React from 'react';
 import graphGIF from '../images/graph_animation_nobg.gif';
-import logo from "../images/logo.png";
 import Footer from './Footer';
 
 

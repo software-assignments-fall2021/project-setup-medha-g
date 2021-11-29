@@ -7,7 +7,7 @@ require("dotenv").config({ silent: true });
 const JWT_SECRET = process.env.JWT_SECRET;
 
 router.get("/checkup", auth.optional, (req, res) => {
-	res.json({ message: "If you see this, the server is up" });
+	res.json({ up: true });
 });
 
 router.get("/checkAuthorize", auth.optional, (req, res) => {
