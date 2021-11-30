@@ -12,7 +12,7 @@ router.get("/checkup", auth.optional, (req, res) => {
 
 router.get("/checkAuthorize", auth.optional, (req, res) => {
 	const {
-		body: { token },
+		headers: { token },
 	} = req;
 
 	try {
@@ -20,7 +20,6 @@ router.get("/checkAuthorize", auth.optional, (req, res) => {
 		const payload = jwt.verify(token, JWT_SECRET);
 		res.json({ message: "If you see this mesasage you are authorized." });
 	} catch (err) {
-		console.log(err);
 		res.status(401).json({ message: "If you see this mesasage you are not authorized." });
 	}
 });

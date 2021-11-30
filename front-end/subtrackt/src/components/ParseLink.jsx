@@ -5,7 +5,6 @@ const ParseLink = props => {
     const onExit = (error, metatdata) => console.log('onExit', error, metatdata);
     const onEvent = (eventName, metadata) => console.log('onEvent', eventName, metadata);
     const onSuccess = useCallback((token, metadata) => {
-        console.log("On Success");
         props.getAccessToken(token);
     }, [props]);
 

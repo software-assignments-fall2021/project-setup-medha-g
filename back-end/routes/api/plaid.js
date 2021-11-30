@@ -253,7 +253,6 @@ router.get('/parse', auth.required, async (req, res) => {
                 }
                 // put subscription object into database if no duplicate
                 if (!duplicate) {
-                    console.log("Adding subobj into db", subObj);
                     user.addSubscriptions(subObj)
                 }
             }
@@ -262,7 +261,6 @@ router.get('/parse', auth.required, async (req, res) => {
         user.save().then(() => res.json("Successfully parsed and added to db"));
 
     } catch (error) {
-        console.log(error)
         return res.status(500).json({ err: error.message })
     }
 })

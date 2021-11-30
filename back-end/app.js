@@ -28,6 +28,7 @@ app.use(
 		saveUninitialized: false,
 	})
 );
+
 if (!isProduction) app.use(errorHandler());
 
 app.use((err, req, res, next) => {
