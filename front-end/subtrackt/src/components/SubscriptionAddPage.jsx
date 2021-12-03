@@ -134,7 +134,7 @@ const SubscriptionAddPage = (props) => {
             });
 
         props.handleBack();
-    }
+    
 
     return (
         <div className="custom-form pop-up">
