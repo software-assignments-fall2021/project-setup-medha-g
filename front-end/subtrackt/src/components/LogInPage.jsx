@@ -1,29 +1,16 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { useHistory, useLocation } from "react-router-dom";
 import { useAuth } from "./use-auth";
 import useToggle from "./use-toggle";
 import Footer from "./Footer.jsx";
-
-
-
-
 const LogInPage = (props) => {
     let history = useHistory();
     let location = useLocation();
     let auth = useAuth();
-
     let { from } = location.state || { fromt: { pathname: "/" } }
-
     const [username, setUsername] = useState("");
     const [password, setPassword] = useState("");
-    const [validSubmit, setValid] = useState(false);
     const showpass = useToggle();
-
-    useEffect(() => {
-        if(username.length < 5 || password.length < 8) setValid(false);
-        else setValid(true); 
-    }, [username, password]);
-
     // Handlers ==================================================================================================
     const handleUsername = (event) => {
         setUsername(event.target.value);
@@ -36,7 +23,6 @@ const LogInPage = (props) => {
         e.preventDefault();
         auth.signin(username, password, history.replace(from));
     }
-
     return (
         <div className="Login">
             <div>
@@ -50,7 +36,6 @@ const LogInPage = (props) => {
                             onChange={handleUsername}
                             placeholder="Username"
                         />
-                        <small className="form-text text-muted">Username must be at least 5 letters long</small>
                     </div>
                     <br />
                     <div className="mb-3">
@@ -60,16 +45,14 @@ const LogInPage = (props) => {
                             value={password}
                             onChange={handlePassword}
                             placeholder="Password"
-
                         />
-                        <small className="form-text text-muted">Password must be at least 8 letters long</small>
-                        <br/>
                         Show Password: <input type="checkbox" onClick={showpass.trigger} />
                     </div>
                     <br />
-                    <button type="submit" className="custom-button" disabled={!validSubmit} onClick={handleSubmit}>Submit</button>
+                    {auth.errMessage ? <div>{auth.errMessage}</div> : null}
+                    <button type="submit" className="custom-button" onClick={handleSubmit}>Submit</button>
                     <br/><br/>
-    
+
                     <p className="signup_login_link">Don't have an account? <button className="button-link" onClick={props.handleChange}>Sign up</button></p><br/><br/>
                 </form>
             </div>
@@ -79,5 +62,4 @@ const LogInPage = (props) => {
 
     );
 };
-
 export default LogInPage;

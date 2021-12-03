@@ -79,7 +79,7 @@ const SubscriptionAddPage = (props) => {
     }
 
     useEffect(() => {
-        if (auth.jwt) createLinkToken(auth.jwt);
+        if(auth.jwt) createLinkToken(auth.jwt);
     }, [createLinkToken, auth.jwt]);
 
 
@@ -103,34 +103,34 @@ const SubscriptionAddPage = (props) => {
         var givenDomain = document.getElementById("subscriptionURLInputID").value
         console.log(givenDomain)
 
-        const { REACT_APP_CLEARBIT_API_KEY } = process.env //retrieves api key from .env
+        const  {REACT_APP_CLEARBIT_API_KEY} = process.env //retrieves api key from .env
         var clearbit = require('clearbit')(REACT_APP_CLEARBIT_API_KEY); //creates api call 
-        clearbit.Company.find({ domain: givenDomain, stream: true })
-            .then(function (company) {
-                console.log('Description: ', company.description);
-                console.log('Name: ', company.name);
-                console.log('Industry: ', company.category.subIndustry)
-
-                props.handleSubmit({
-                    image: company.logo,
-                    title: company.name,
-                    description: company.description,
-                    plan: plan,
-                    industry: company.category.industry
-                })
-
+        clearbit.Company.find({domain: givenDomain, stream: true})
+        .then(function (company) {
+            console.log('Description: ', company.description);
+            console.log('Name: ', company.name);
+            console.log('Company: ', company)
+        
+            props.handleSubmit({
+                image: company.logo,
+                title: company.name,
+                description: company.description,
+                plan: plan,
+                tags: company.tags            
             })
-            .catch((error) => {
-                console.log(error)
-                props.handleSubmit({
-                    image: placeholderImage,
-                    title: givenDomain,
-                    description: givenDomain,
-                    plan: plan,
-                    industry: "unknown"
-                })
-            });
-
+            
+        })
+        .catch((error) => { 
+            console.log(error)
+            props.handleSubmit({
+                image: placeholderImage, 
+                title: givenDomain,
+                description: givenDomain,
+                plan: plan,
+                tags: []
+            })
+          });
+        
         props.handleBack();
     }
 
@@ -149,33 +149,30 @@ const SubscriptionAddPage = (props) => {
             <br />
             <label>Subscription plan:</label>
             <div className="input-group mb-3">
-                <label className="input-group-addon" for="price">$</label>
+                <span className="input-group-text">$</span>
                 <input
-                    type="text"
+                    type="number"
                     value={plan.price}
                     className="form-control"
                     onChange={handlePrice}
-                    id="price"
                 />
-                <div className="input-group-addon">
-                    <span className="input-group-text">/</span>
-                </div>
+                <span className="input-group-text">/</span>
                 <input
-                    type="text"
+                    type="number"
                     value={plan.time_quantity}
                     className="form-control"
                     onChange={handleTimeQuantity}
                 />
+                <select className="form-select" onChange={handleTimeUnit}>
+                    <option value="day">day(s)</option>
+                    <option value="month">month(s)</option>
+                    <option value="year">year(s)</option>
+                </select>
             </div>
-            <select className="form-control" onChange={handleTimeUnit}>
-                <option value="day">day(s)</option>
-                <option value="month">month(s)</option>
-                <option value="year">year(s)</option>
-            </select>
             <div>
                 <button className="custom-button" onClick={handleSubmit}>Submit</button>
                 <button className="custom-button" onClick={props.handleBack}>Close</button>
-            </div><br />
+            </div><br/>
             <div>
                 <ParseOption access_token={access_token} token={link_token} getAccessToken={getAccessToken} handleRender={props.handleRender} />
             </div>
