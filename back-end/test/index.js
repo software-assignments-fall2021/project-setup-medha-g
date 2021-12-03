@@ -102,23 +102,24 @@ describe('Server', function () {
             Math.floor(Math.random() * charactersLength)
         )
 
-        it('should register user', function (done) {
+        it('should register user and delete', function (done) {
             request(app)
                 .post('/api/users/register')
                 .send({
                     user: { username: randCharOne, password: randCharTwo },
                 })
                 .expect(200, function (err, res) {
-                    done()
-                })
-        })
+                    let jwt = res.body.user.token;
 
-        it('should delete user', function (done) {
-            request(app)
-                .post('/api/users/register')
-                .send({ user: { username: randCharOne } })
-                .expect(200, function (err, res) {
-                    done()
+                    request(app)
+                        .delete('/api/users/deleteaccount')
+                        .set("Authorization", `Token ${jwt}`)
+                        .send({ user: { username: randCharOne } })
+                        .expect(200, function (err, res) {
+                            if(err) done(err);
+
+                            done()
+                        })
                 })
         })
     })
