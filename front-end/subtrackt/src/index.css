@@ -8,10 +8,10 @@
 .navbar {
   overflow: hidden;
   background-color: #b4896c;
+  z-index:20;
   position: fixed; /* Set the navbar to fixed position */
   top: 0;
   width: 100%;
-  z-index: 1;
 }
 
 .navbar a {
