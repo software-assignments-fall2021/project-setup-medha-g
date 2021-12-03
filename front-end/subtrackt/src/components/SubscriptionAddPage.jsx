@@ -116,7 +116,7 @@ const SubscriptionAddPage = (props) => {
                 title: company.name,
                 description: company.description,
                 plan: plan,
-                tags: company.tags
+                tags: company.tags,
                 industry: company.category.subIndustry
             })
             
