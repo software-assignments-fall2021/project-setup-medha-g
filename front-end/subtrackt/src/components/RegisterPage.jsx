@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useAuth } from "./use-auth";
 import { useHistory, useLocation } from "react-router-dom";
 import useToggle from "./use-toggle";
@@ -9,7 +9,13 @@ const RegisterPage = (props) => {
 
     const [username, setUsername] = useState("");
     const [password, setPassword] = useState("");
+    const [validSubmit, setValid] = useState(false);
     const showpass = useToggle();
+
+    useEffect(() => {
+        if(username.length < 5 || password.length < 8) setValid(false);
+        else setValid(true); 
+    }, [username, password]);
 
     let auth = useAuth();
     let history = useHistory();
@@ -25,6 +31,7 @@ const RegisterPage = (props) => {
     };
     const handleSubmit = e => {
         // prevent the HTML form from actually submitting 
+        console.log("trying to login")
         e.preventDefault();
         auth.signup(username, password, history.replace(from));
     }
@@ -41,6 +48,7 @@ const RegisterPage = (props) => {
                         onChange={handleUsername}
                         placeholder="Username"
                     />
+                    <small className="form-text text-muted">Username must be at least 5 letters long</small>
                 </div>
                 <br />
                 <div className="mb-3">
@@ -51,10 +59,12 @@ const RegisterPage = (props) => {
                         onChange={handlePassword}
                         placeholder="Password"
                     />
+                    <small className="form-text text-muted">Password must be at least 8 letters long</small>
+                    <br />
                     Show Password: <input type="checkbox" onClick={showpass.trigger} />
                 </div>
                 <br />
-                <button type="submit" className="custom-button" onClick={handleSubmit}>Submit</button>
+                <button type="submit" className="custom-button" onClick={handleSubmit} disabled={!validSubmit}>Submit</button>
                 <br/><br/><p className="signup_login_link">Already have an account? <button className="button-link" onClick={props.handleChange}>Sign in</button></p><br/><br/>
             </form>
             <Footer/>

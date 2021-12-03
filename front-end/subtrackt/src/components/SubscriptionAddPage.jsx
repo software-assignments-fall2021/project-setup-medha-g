@@ -79,7 +79,7 @@ const SubscriptionAddPage = (props) => {
     }
 
     useEffect(() => {
-        if(auth.jwt) createLinkToken(auth.jwt);
+        if (auth.jwt) createLinkToken(auth.jwt);
     }, [createLinkToken, auth.jwt]);
 
 
@@ -103,7 +103,7 @@ const SubscriptionAddPage = (props) => {
         var givenDomain = document.getElementById("subscriptionURLInputID").value
         console.log(givenDomain)
 
-        const  {REACT_APP_CLEARBIT_API_KEY} = process.env //retrieves api key from .env
+        const { REACT_APP_CLEARBIT_API_KEY } = process.env //retrieves api key from .env
         var clearbit = require('clearbit')(REACT_APP_CLEARBIT_API_KEY); //creates api call 
         clearbit.Company.find({domain: givenDomain, stream: true})
         .then(function (company) {
@@ -116,7 +116,8 @@ const SubscriptionAddPage = (props) => {
                 title: company.name,
                 description: company.description,
                 plan: plan,
-                tags: company.tags            
+                tags: company.tags
+                industry: company.category.subIndustry
             })
             
         })
@@ -127,10 +128,11 @@ const SubscriptionAddPage = (props) => {
                 title: givenDomain,
                 description: givenDomain,
                 plan: plan,
-                tags: []
-            })
-          });
-        
+                tags: [],
+                industry: "unknown"
+              
+            });
+
         props.handleBack();
     }
 
@@ -149,30 +151,33 @@ const SubscriptionAddPage = (props) => {
             <br />
             <label>Subscription plan:</label>
             <div className="input-group mb-3">
-                <span className="input-group-text">$</span>
+                <label className="input-group-addon" for="price">$</label>
                 <input
-                    type="number"
+                    type="text"
                     value={plan.price}
                     className="form-control"
                     onChange={handlePrice}
+                    id="price"
                 />
-                <span className="input-group-text">/</span>
+                <div className="input-group-addon">
+                    <span className="input-group-text">/</span>
+                </div>
                 <input
-                    type="number"
+                    type="text"
                     value={plan.time_quantity}
                     className="form-control"
                     onChange={handleTimeQuantity}
                 />
-                <select className="form-select" onChange={handleTimeUnit}>
-                    <option value="day">day(s)</option>
-                    <option value="month">month(s)</option>
-                    <option value="year">year(s)</option>
-                </select>
             </div>
+            <select className="form-control" onChange={handleTimeUnit}>
+                <option value="day">day(s)</option>
+                <option value="month">month(s)</option>
+                <option value="year">year(s)</option>
+            </select>
             <div>
                 <button className="custom-button" onClick={handleSubmit}>Submit</button>
                 <button className="custom-button" onClick={props.handleBack}>Close</button>
-            </div><br/>
+            </div><br />
             <div>
                 <ParseOption access_token={access_token} token={link_token} getAccessToken={getAccessToken} handleRender={props.handleRender} />
             </div>
