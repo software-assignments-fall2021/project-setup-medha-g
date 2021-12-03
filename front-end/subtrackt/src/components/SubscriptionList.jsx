@@ -2,6 +2,7 @@ import axios from 'axios';
 import React, { useState, useCallback } from 'react';
 import Subscription from './Subscription';
 import SubcriptionAddPage from './SubscriptionAddPage';
+import GraphGatherer from './GraphGatherer';
 import useAsync from './use-async';
 import { useAuth } from './use-auth';
 import useRender from './use-render';
@@ -36,7 +37,7 @@ function useSubList(initList) {
 
     const addSublist = sub => {
         setSublist(prev => {
-        
+
             return [...prev, sub]
         });
     }
@@ -66,6 +67,7 @@ const SubscriptionList = () => {
      *  title: title/name of the subscription,
      *  description: description of the subscription,
      *  plan: price plan
+     *  tags: tags of the subscription
      * }
      */
     const [sublist, addList, deleteList, setList] = useSubList([]);
@@ -93,6 +95,7 @@ const SubscriptionList = () => {
     // Handlers ==================================================================================================
 
     const handleAddSub = sub => {
+        console.log("Add sub", sub);
         // sub = generateRandomSub(); 
         axios.post("/api/users/addsubscriptioninfo", { sub_info: sub }, {
             headers: {
@@ -123,8 +126,6 @@ const SubscriptionList = () => {
         toggleSeePage(true);
         var currAddButton = document.getElementById("addButton");
         currAddButton.style.display = "none";
-
-
     }
     const handleUnseePage = () => {
         toggleSeePage(false);
@@ -152,16 +153,17 @@ const SubscriptionList = () => {
     // Still need to add proper add button
     return (
         <div>
-        <div className="SubscriptionBox">
-            <br></br><br></br><br></br>
-            <h3>Your Subscriptions</h3>
-            <button className="custom-button" onClick={handleSeePage} id="addButton">+</button>
-            {seePage ? <SubcriptionAddPage handleSubmit={handleAddSub} handleBack={handleUnseePage} handleRender={forceRender} /> : null}
-            <ol className="SubscriptionList">
-                {renderList()}
-            </ol>
-        </div>
-        <Footer/>
+            <div className="SubscriptionBox">
+                <br></br><br></br><br></br>
+                <h3>Your Subscriptions</h3>
+                <button className="custom-button" onClick={handleSeePage} id="addButton">+</button>
+                {seePage ? <SubcriptionAddPage handleSubmit={handleAddSub} handleBack={handleUnseePage} handleRender={forceRender} /> : null}
+                <ol className="SubscriptionList">
+                    {renderList()}
+                </ol>
+            </div>
+            <GraphGatherer sublist={sublist}/>
+            <Footer />
         </div>
     )
 }

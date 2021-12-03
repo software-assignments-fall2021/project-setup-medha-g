@@ -46,6 +46,7 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   font-size: 17px;
+  background-color: #f2fff9;
   color: #926c68;
   line-height: 1.6;
 }
@@ -432,9 +433,6 @@ input[type="password"]:focus {
 .SubscriptionBox {
   background-color: #f2fff9;
   background-size: cover;
-  padding-bottom: 3000px;
-  height: 600px;
-  z-index: 1000;
 }
 
 .signup_login_link {
@@ -483,7 +481,10 @@ input[type="password"]:focus {
 .plaid-button:hover{
   background: #aa807b !important;
   color: black;
+}
 
+.graph-gather {
+  background-color: #f2fff9;
 }
 
 .button-link {

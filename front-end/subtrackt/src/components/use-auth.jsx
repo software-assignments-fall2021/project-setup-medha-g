@@ -37,6 +37,7 @@ export const useProvideAuth = () => {
       })
       .catch((error) => {
         setUser(false);
+        console.log(error.response.data.errors)
         setMessage(error.response.data.errors);
       });
     if (effect) effect();

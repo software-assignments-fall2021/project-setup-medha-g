@@ -58,6 +58,7 @@ const LogInPage = (props) => {
                         Show Password: <input type="checkbox" onClick={showpass.trigger} />
                     </div>
                     <br />
+                    {auth.errMessage ? <div>{auth.errMessage}</div> : null}
                     <button type="submit" className="custom-button" onClick={handleSubmit}>Submit</button>
                     <br/><br/>
     
@@ -65,7 +66,6 @@ const LogInPage = (props) => {
                 </form>
             </div>
             <Footer/>
-            {auth.errMessage ? <div>{auth.errMessage}</div> : null}
         </div>
 
     );

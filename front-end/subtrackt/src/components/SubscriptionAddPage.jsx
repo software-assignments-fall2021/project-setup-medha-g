@@ -109,14 +109,14 @@ const SubscriptionAddPage = (props) => {
         .then(function (company) {
             console.log('Description: ', company.description);
             console.log('Name: ', company.name);
-            console.log('Industry: ', company.category.subIndustry)
+            console.log('Company: ', company)
         
             props.handleSubmit({
                 image: company.logo,
                 title: company.name,
                 description: company.description,
                 plan: plan,
-                industry: company.category.industry            
+                tags: company.tags            
             })
             
         })
@@ -127,7 +127,7 @@ const SubscriptionAddPage = (props) => {
                 title: givenDomain,
                 description: givenDomain,
                 plan: plan,
-                industry: "unknown"
+                tags: []
             })
           });
         

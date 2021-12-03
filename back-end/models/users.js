@@ -18,6 +18,7 @@ const UsersSchema = new Schema({
             image: String,
             title: String,
             description: String,
+            tags: [String],
             plan: {
                 price: Number,
                 time_quantity: Number,
