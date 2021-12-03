@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useHistory, useLocation } from "react-router-dom";
 import { useAuth } from "./use-auth";
 import useToggle from "./use-toggle";
@@ -16,7 +16,13 @@ const LogInPage = (props) => {
 
     const [username, setUsername] = useState("");
     const [password, setPassword] = useState("");
+    const [validSubmit, setValid] = useState(false);
     const showpass = useToggle();
+
+    useEffect(() => {
+        if(username.length < 5 || password.length < 8) setValid(false);
+        else setValid(true); 
+    }, [username, password]);
 
     // Handlers ==================================================================================================
     const handleUsername = (event) => {
@@ -44,6 +50,7 @@ const LogInPage = (props) => {
                             onChange={handleUsername}
                             placeholder="Username"
                         />
+                        <small className="form-text text-muted">Username must be at least 5 letters long</small>
                     </div>
                     <br />
                     <div className="mb-3">
@@ -55,10 +62,12 @@ const LogInPage = (props) => {
                             placeholder="Password"
 
                         />
+                        <small className="form-text text-muted">Password must be at least 8 letters long</small>
+                        <br/>
                         Show Password: <input type="checkbox" onClick={showpass.trigger} />
                     </div>
                     <br />
-                    <button type="submit" className="custom-button" onClick={handleSubmit}>Submit</button>
+                    <button type="submit" className="custom-button" disabled={!validSubmit} onClick={handleSubmit}>Submit</button>
                     <br/><br/>
     
                     <p className="signup_login_link">Don't have an account? <button className="button-link" onClick={props.handleChange}>Sign up</button></p><br/><br/>
