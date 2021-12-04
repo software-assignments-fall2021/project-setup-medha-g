@@ -31,6 +31,7 @@ router.post('/register', auth.optional, async (req, res, next) => {
     }
 
     const finalUser = new Users(user)
+    finalUser.spending = [];
     finalUser.isAdmin = false // normal users should not be admin.
 
     finalUser.setPassword(user.password)
@@ -173,6 +174,57 @@ router.delete('/deleteaccount', auth.required, (req, res, next) => {
         else {
             return res.json({ message: 'Success' })
         }
+    })
+})
+
+router.get('/monthly_spending', auth.required, (req, res) => {
+    const {
+        payload: {_id}
+    } = req;
+
+    Users.findById(_id).then(user => {
+        if(!user) res.status(404).json({err: "User not found"});
+
+        return res.json({spending: user.spending.slice(user.spending.length - 6)})
+    })
+})
+
+router.get('/yearly_spending', auth.required, (req, res) => {
+    const {
+        payload: {_id}
+    } = req;
+
+    Users.findById(_id).then(user => {
+        if(!user) res.status(404).json({err: "User not found"});
+        if(user.spending.length == 0) return res.json({spending: [0]});
+
+        let year = [];
+        let curr = 0
+        let count = 0;
+        let prev = 0;
+        for(let i = user.spending.length - 1; i >= 0; i--) {
+            curr += user.spending[i];
+            prev = user.spending[i];
+            count++;
+            if(count == 12) {
+                year.push(curr);
+                curr = 0;
+                count = 0;
+            }
+        }
+
+        while(count != 0) {
+            curr += prev;
+            count++;
+            if(count == 12) {
+                year.push(curr);
+                curr = 0;
+                count = 0;
+            }
+        }
+
+        year.reverse();
+        return res.json({spending: year});
     })
 })
 
