@@ -38,6 +38,10 @@
   margin-top: 30px; /* Add a top margin to avoid content overlay */
 }
 
+.teampage {
+  margin-top: 50px; /* Add a top margin to avoid content overlay */
+}
+
 body {
   margin: 0;
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
