@@ -141,18 +141,15 @@ describe('Server', function () {
                         .send({ body: { sub_info: randCharThree }, payload:{_id: jwt} })
                         .expect(200, function (err, res) {
                             if(err) done(err);
-                            // chai.expect(res.body.message).to.equal(
-                            //     'Added subscription'
-                            // )
                             request(app)
                             .post('/api/users/removesubscriptioninfo') //removes subscription information
                             .set("Authorization", `Token ${jwt}`)
                             .send({ body: { sub_info: randCharThree }, payload:{_id: jwt} })
                             .expect(200, function (err, res) {
                                 if(err) done(err);
-                                // chai.expect(res.body.message).to.equal(
-                                //     'Added subscription'
-                                // )
+                                chai.expect(res.body.message).to.equal(
+                                    'Deleted subscription'
+                                )
                                 done()
                             })
                         })
