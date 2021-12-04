@@ -102,6 +102,10 @@ describe('Server', function () {
             Math.floor(Math.random() * charactersLength)
         )
 
+        let randCharThree = characters.charAt(
+            Math.floor(Math.random() * charactersLength)
+        )
+
         it('should register user and delete', function (done) {
             request(app)
                 .post('/api/users/register')
@@ -120,6 +124,40 @@ describe('Server', function () {
 
                             done()
                         })
+                })
+        })
+        it('should register user, add subscription information, then remove subscription information', function (done) {
+            request(app)
+                .post('/api/users/register') //registers user
+                .send({
+                    user: { username: randCharOne, password: randCharTwo },
+                })
+                .expect(200, function (err, res) {
+                    let jwt = res.body.user.token;
+
+                    request(app)
+                        .post('/api/users/addsubscriptioninfo') //adds subscription information
+                        .set("Authorization", `Token ${jwt}`)
+                        .send({ body: { sub_info: randCharThree }, payload:{_id: jwt} })
+                        .expect(200, function (err, res) {
+                            if(err) done(err);
+                            // chai.expect(res.body.message).to.equal(
+                            //     'Added subscription'
+                            // )
+                            request(app)
+                            .post('/api/users/removesubscriptioninfo') //removes subscription information
+                            .set("Authorization", `Token ${jwt}`)
+                            .send({ body: { sub_info: randCharThree }, payload:{_id: jwt} })
+                            .expect(200, function (err, res) {
+                                if(err) done(err);
+                                // chai.expect(res.body.message).to.equal(
+                                //     'Added subscription'
+                                // )
+                                done()
+                            })
+                        })
+
+                        
                 })
         })
     })
