@@ -88,25 +88,11 @@ describe('Server', function () {
                 })
         })
 
-        const characters =
-            'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789'
-        const charactersLength = characters.length
-
-        // eslint-disable-next-line prefer-const
-        let randCharOne = characters.charAt(
-            Math.floor(Math.random() * charactersLength)
-        )
-
-        // eslint-disable-next-line prefer-const
-        let randCharTwo = characters.charAt(
-            Math.floor(Math.random() * charactersLength)
-        )
-
         it('should register user and delete', function (done) {
             request(app)
                 .post('/api/users/register')
                 .send({
-                    user: { username: randCharOne, password: randCharTwo },
+                    user: { username: "***", password: "***" },
                 })
                 .expect(200, function (err, res) {
                     let jwt = res.body.user.token;
@@ -114,7 +100,7 @@ describe('Server', function () {
                     request(app)
                         .delete('/api/users/deleteaccount')
                         .set("Authorization", `Token ${jwt}`)
-                        .send({ user: { username: randCharOne } })
+                        .send({ user: { username: "***" } })
                         .expect(200, function (err, res) {
                             if(err) done(err);
 
