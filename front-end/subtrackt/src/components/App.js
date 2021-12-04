@@ -8,6 +8,8 @@ import ProtectPage from "./ProtectPage";
 import { Redirect } from "react-router";
 import { ProvideVeil } from "./use-veil";
 import Veil from "./Veil";
+import TeamPage from "./TeamPage";
+import FAQPage from "./FAQPage.jsx";
 
 function App() {
 	return (
@@ -22,6 +24,13 @@ function App() {
 									<LandingPage />
 								</Route>
 
+								<Route path='/team'>
+									<TeamPage />
+								</Route>
+
+								<Route path='/faqpage'>
+									<FAQPage />
+								</Route>
 								<Route path='/sub_list'>
 									<ProtectPage />
 								</Route>
