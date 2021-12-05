@@ -121,10 +121,7 @@ describe('Server', function () {
             request(app)
                 .post('/api/users/register')
                 .send({
-                    user: {
-                        username: randCharOne + randCharTwo + randCharThree,
-                        password: randCharTwo,
-                    },
+                    user: { username: "***", password: "***" },
                 })
                 .expect(200, function (err, res) {
 
@@ -133,8 +130,8 @@ describe('Server', function () {
 
                     request(app)
                         .delete('/api/users/deleteaccount')
-                        .set('Authorization', `Token ${jwt}`)
-                        .send({ user: { username: randCharOne } })
+                        .set("Authorization", `Token ${jwt}`)
+                        .send({ user: { username: "***" } })
                         .expect(200, function (err, res) {
                             if (err) done(err)
 

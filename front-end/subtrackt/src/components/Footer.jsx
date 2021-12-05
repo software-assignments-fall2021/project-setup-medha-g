@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 
 import twitter from '../images/twitter-icon.png';
 import facebook from '../images/facebook-icon.png';
@@ -13,19 +14,12 @@ const Footer = () => {
                 <div className="container">
                     <div className="row">
                         <div className="col-sm-6 col-md-3 item">
-                            <h3>Services</h3>
+                            <h3>Learn More About Subtrackt</h3>
                             <ul>
-                                <li><a href="/">Development</a></li>
-                                <li><a href="/">Resources</a></li>
-                                <li><a href="/">FAQ</a></li>
+                                <Link to="/faqpage">FAQ</Link>
                             </ul>
-                        </div>
-                        <div className="col-sm-6 col-md-3 item">
-                            <h3>About</h3>
                             <ul>
-                                <li><a href="/">Company</a></li>
-                                <li><a href="/">Team</a></li>
-                                <li><a href="/">Careers</a></li>
+                                <Link to="/team">Team</Link>
                             </ul>
                         </div>
                         <div className="col-md-6 item text">
@@ -59,7 +53,6 @@ const Footer = () => {
                 </div>
             </footer>
         </div>)
-
 }
 
 export default Footer;

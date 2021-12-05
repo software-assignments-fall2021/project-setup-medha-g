@@ -13,6 +13,7 @@ const UsersSchema = new Schema({
     hashed_password: String,
     salt: String,
     isAdmin: Boolean,
+    spending: [Number], 
     subscriptions: [
         {
             image: String,
