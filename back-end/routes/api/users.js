@@ -86,17 +86,21 @@ router.post('/addsubscriptioninfo', auth.required, (req, res, next) => {
         body: { sub_info },
         payload: { _id },
     } = req
+    console.log("hi");
 
     Users.findById(_id).then((user) => {
         if (!user) {
             return res.status(404).json({err: "User not found"});
         }
+        console.log("hi1");
 
         user.addSubscription(sub_info)
         user.save().then(() => {
+            console.log("hi2");
             return res.json({
                 message: `Added subscription ${JSON.stringify(sub_info)}`,
                 user: user.generateAuthRes(),
+                sub_info
             })
         })
     }).catch(err => {

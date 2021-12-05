@@ -1,7 +1,10 @@
 /* eslint-disable camelcase */
 const request = require('supertest')
 const chai = require('chai')
+const { expect } = require('chai')
+const { token } = require('morgan')
 require('dotenv').config({ silent: true })
+var jwt_global;
 
 describe('Server', function () {
     let server
@@ -91,6 +94,7 @@ describe('Server', function () {
         const characters =
             'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789'
         const charactersLength = characters.length
+        const numbers = '0123456789'
 
         // eslint-disable-next-line prefer-const
         let randCharOne = characters.charAt(
@@ -106,56 +110,163 @@ describe('Server', function () {
             Math.floor(Math.random() * charactersLength)
         )
 
+        let randNum = numbers.charAt(
+            Math.floor(Math.random() * charactersLength)
+        )
+
         it('should register user and delete', function (done) {
+            console.log('hello')
             request(app)
                 .post('/api/users/register')
                 .send({
-                    user: { username: randCharOne, password: randCharTwo },
+                    user: {
+                        username: randCharOne + randCharTwo + randCharThree,
+                        password: randCharTwo,
+                    },
                 })
                 .expect(200, function (err, res) {
-                    let jwt = res.body.user.token;
+                    console.log('token: ', res.body.user)
+
+                    let jwt = res.body.user.token
 
                     request(app)
                         .delete('/api/users/deleteaccount')
-                        .set("Authorization", `Token ${jwt}`)
+                        .set('Authorization', `Token ${jwt}`)
                         .send({ user: { username: randCharOne } })
                         .expect(200, function (err, res) {
-                            if(err) done(err);
+                            if (err) done(err)
 
                             done()
                         })
                 })
         })
-        it('should register user, add subscription information, then remove subscription information', function (done) {
+        it('should register user and add subscription information', function (done) {
             request(app)
                 .post('/api/users/register') //registers user
                 .send({
-                    user: { username: randCharOne, password: randCharTwo },
+                    user: {
+                        username: randCharOne + randCharTwo + randCharTwo,
+                        password: randCharTwo,
+                    },
                 })
                 .expect(200, function (err, res) {
-                    let jwt = res.body.user.token;
+                    let jwt = res.body.user.token
+                    jwt_global = res.body.user.token
+                    console.log('random: ', randCharThree)
+
+                    mock_sub = {
+                        image: randCharThree,
+                        title: randCharThree,
+                        description: randCharThree,
+                        tags: [randCharThree],
+                        plan: {
+                            price: randNum,
+                            time_quantity: randNum,
+                            time_unit: randCharThree,
+                        },
+                    }
 
                     request(app)
                         .post('/api/users/addsubscriptioninfo') //adds subscription information
-                        .set("Authorization", `Token ${jwt}`)
-                        .send({ body: { sub_info: randCharThree }, payload:{_id: jwt} })
+                        .set('Authorization', `Token ${jwt}`)
+                        .send({ sub_info: mock_sub, payload: { _id: jwt } })
                         .expect(200, function (err, res) {
-                            if(err) done(err);
-                            request(app)
-                            .post('/api/users/removesubscriptioninfo') //removes subscription information
-                            .set("Authorization", `Token ${jwt}`)
-                            .send({ body: { sub_info: randCharThree }, payload:{_id: jwt} })
-                            .expect(200, function (err, res) {
-                                if(err) done(err);
-                                chai.expect(res.body.message).to.equal(
-                                    'Deleted subscription'
-                                )
-                                done()
-                            })
+                            if (err) done(err)
+                            chai.expect(res.body.sub_info).to.deep.equal(mock_sub)
+                            done()
                         })
-
-                        
+                })
+        })
+        it('should remove subscription information', function (done) {
+            let jwt = jwt_global;
+            request(app)
+                .post('/api/users/removesubscriptioninfo') //removes subscription information
+                .set('Authorization', `Token ${jwt}`)
+                .send({
+                    body: { sub_info: randCharThree },
+                    payload: { _id: jwt },
+                })
+                .expect(200, function (err, res) {
+                    if (err) done(err)
+                    chai.expect(res.body.message).to.equal(
+                        'Deleted subscription'
+                    )
+                    done()
                 })
         })
     })
+    describe('Plaid API', function () {
+        const characters =
+            'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789'
+        const charactersLength = characters.length
+
+        // eslint-disable-next-line prefer-const
+        let randUsername = characters.charAt(
+            Math.floor(Math.random() * charactersLength)
+        )
+        let randPassword = characters.charAt(
+            Math.floor(Math.random() * charactersLength)
+        )
+
+        var linkToken = null;
+        var accessToken = null;
+        var jwt = null;
+
+        it('should create a link token', function (done) {
+            request(app)
+                .post('/api/users/register') //registers a new user
+                .send({
+                    user: {
+                        username: randUsername + randPassword + randPassword,
+                        password: randPassword,
+                    },
+                })
+                .expect(200, function (err, res) {
+                    jwt = res.body.user.token
+                    request(app)
+                        .get('/api/plaid/create_link_token') //creates link token
+                        .set('Authorization', `Token ${jwt}`)
+                        .send({
+                            username:
+                                randUsername + randPassword + randPassword,
+                        })
+                        .expect(200, function (err, res) {
+                            expect(Object.keys(res.body)).to.include(
+                                'link_token'
+                            )
+                            console.log("token check")
+                            // console.log("res", res.onSuccess(res.body.link_token))
+                            linkToken = res.body.link_token
+                            done()
+                        })
+                })
+        }) //need to mock plaid middleware
+        // it('should create an access token', function (done) { 
+        //     request(app)
+        //         .get('/api/plaid/get_access_token') //creates link token
+        //         .set('Authorization', `Token ${jwt}`)
+        //         .send({
+        //             username: randUsername + randPassword + randPassword,
+        //         })
+        //         .expect(200, function (err, res) {
+        //             expect(Object.keys(res.body)).to.include('access_token')
+        //             done()
+        //         })
+        // })
+    })
 })
+
+// .expect(200, function (err, res) {
+//     let public_token = res.body.link_token;
+//     console.log("public: ",res.body);
+//     request(app)
+//     .post('/api/plaid/get_access_token') //gets access token
+//     .set("Authorization", `Token ${jwt}`)
+//     .send({ public_token: public_token })
+//     .expect(200, function (err, res) {
+//         console.log("res: ", res.body);
+//         let access_token = res.body.data.access_token;
+//         console.log("access token: ", access_token);
+//         done();
+//     })
+// })

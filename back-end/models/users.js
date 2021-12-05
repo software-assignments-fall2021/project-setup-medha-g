@@ -19,7 +19,6 @@ const UsersSchema = new Schema({
             title: String,
             description: String,
             tags: [String],
-            industry: String,
             plan: {
                 price: Number,
                 time_quantity: Number,
