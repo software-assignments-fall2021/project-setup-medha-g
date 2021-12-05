@@ -4,6 +4,9 @@ const chai = require('chai')
 const { expect } = require('chai')
 const { token } = require('morgan')
 require('dotenv').config({ silent: true })
+const { ObjectId } = require('bson');
+
+
 var jwt_global;
 
 describe('Server', function () {
@@ -115,7 +118,6 @@ describe('Server', function () {
         )
 
         it('should register user and delete', function (done) {
-            console.log('hello')
             request(app)
                 .post('/api/users/register')
                 .send({
@@ -125,8 +127,8 @@ describe('Server', function () {
                     },
                 })
                 .expect(200, function (err, res) {
-                    console.log('token: ', res.body.user)
 
+                    
                     let jwt = res.body.user.token
 
                     request(app)
@@ -152,7 +154,6 @@ describe('Server', function () {
                 .expect(200, function (err, res) {
                     let jwt = res.body.user.token
                     jwt_global = res.body.user.token
-                    console.log('random: ', randCharThree)
 
                     mock_sub = {
                         image: randCharThree,
@@ -222,7 +223,10 @@ describe('Server', function () {
                     },
                 })
                 .expect(200, function (err, res) {
-                    jwt = res.body.user.token
+                    jwt = res.body.user.token;
+                    // jwt_global = jwt;
+                    // window.localStorage.setItem('jwt_local_storage', jwt);
+                    // console.log("hi:", jwt_global)
                     request(app)
                         .get('/api/plaid/create_link_token') //creates link token
                         .set('Authorization', `Token ${jwt}`)
@@ -234,7 +238,6 @@ describe('Server', function () {
                             expect(Object.keys(res.body)).to.include(
                                 'link_token'
                             )
-                            console.log("token check")
                             // console.log("res", res.onSuccess(res.body.link_token))
                             linkToken = res.body.link_token
                             done()
@@ -253,20 +256,56 @@ describe('Server', function () {
         //             done()
         //         })
         // })
+
     })
+    // describe('Database Maintenance', function () {
+    //     const characters =
+    //         'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789'
+    //     const charactersLength = characters.length
+
+    //     // eslint-disable-next-line prefer-const
+    //     let randCharOne = characters.charAt(
+    //         Math.floor(Math.random() * charactersLength)
+    //     )
+
+    //     // eslint-disable-next-line prefer-const
+    //     let randCharTwo = characters.charAt(
+    //         Math.floor(Math.random() * charactersLength)
+    //     )
+
+    //     let randCharThree = characters.charAt(
+    //         Math.floor(Math.random() * charactersLength)
+    //     )
+
+    //         it('should delete all users in the database', function (done) {
+    //             request(app)
+    //             .post('/api/users/register') //registers user
+    //             .send({
+    //                 user: {
+    //                     username: randCharOne + randCharTwo + randCharTwo,
+    //                     password: randCharTwo,
+    //                 },
+    //             })
+    //             .expect(200, function (err, res) {
+    //                 let jwt = res.body.user.token
+
+    //                 const id  = new ObjectId(jwt);
+    //                 request(app)
+    //                     .delete('/db/maintenance/deleteallusers') //deletes all users
+    //                     .send(
+    //                         { _id:{id}
+                        
+    //                     })
+    //                     .expect(200, function (err, res) {
+    //                         if (err) done(err)
+    //                         chai.expect(res.body.message).to.equal(
+    //                             'Success'
+    //                         )
+    //                         done()
+    //                     })
+    //             })
+    //         })
+    // })
 })
 
-// .expect(200, function (err, res) {
-//     let public_token = res.body.link_token;
-//     console.log("public: ",res.body);
-//     request(app)
-//     .post('/api/plaid/get_access_token') //gets access token
-//     .set("Authorization", `Token ${jwt}`)
-//     .send({ public_token: public_token })
-//     .expect(200, function (err, res) {
-//         console.log("res: ", res.body);
-//         let access_token = res.body.data.access_token;
-//         console.log("access token: ", access_token);
-//         done();
-//     })
-// })
+
