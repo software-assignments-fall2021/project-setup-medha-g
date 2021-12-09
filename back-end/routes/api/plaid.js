@@ -14,7 +14,7 @@ const CLEARBIT_API_KEY = process.env.CLEARBIT_API_KEY;
 const clearbit = require('clearbit')(CLEARBIT_API_KEY)
 
 const configuration = new plaid.Configuration({
-    basePath: plaid.PlaidEnvironments['sandbox'],
+    basePath: plaid.PlaidEnvironments['development'],
     baseOptions: {
         headers: {
             'PLAID-CLIENT-ID': PLAID_CLIENT_ID,
@@ -44,7 +44,10 @@ router.get("/create_link_token", auth.required, async (req, res) => {
         const response = await client.linkTokenCreate(request);
         return res.json(response.data);
     } catch (error) {
-        if(error.response) return res.status(error.response.status).json({err: error.response.data});
+        if(error.response) {
+            console.log(error.response.data);
+            return res.status(error.response.status).json({err: error.response.data});
+        }
         else res.status(500).json({error: error.message});
     }
 })
@@ -151,8 +154,9 @@ router.get('/parse', auth.required, async (req, res) => {
     const start_date = new Date(end_date)
     start_date.setFullYear(end_date.getFullYear() - 1)
 
-    const start_date_string = `${start_date.getFullYear()}-${start_date.getMonth()}-${start_date.getDate()}`
-    const end_date_string = `${end_date.getFullYear()}-${end_date.getMonth()}-${end_date.getDate()}`
+    const start_date_string = start_date.getFullYear() + '-' + ('0' + (start_date.getMonth()+1)).slice(-2) + '-' + ('0' + start_date.getDate()).slice(-2);
+    const end_date_string = end_date.getFullYear() + '-' + ('0' + (end_date.getMonth()+1)).slice(-2) + '-' + ('0' + end_date.getDate()).slice(-2);
+    console.log(end_date_string);
 
     const request = {
         access_token: access_token,
@@ -161,7 +165,7 @@ router.get('/parse', auth.required, async (req, res) => {
     }
 
     try {
-        const response = await client.transactionsGet(request)
+        const response = await client.transactionsGet(request);
         let transactions = response.data.transactions
         const total_transactions = response.data.total_transactions
         while (transactions.length < total_transactions) {
@@ -181,6 +185,8 @@ router.get('/parse', auth.required, async (req, res) => {
                 paginated_response.data.transactions
             )
         }
+
+        console.log(transactions);
 
         // dictionary containing merchant name and price as a key -> times it was paid as a value
         /**
@@ -261,6 +267,10 @@ router.get('/parse', auth.required, async (req, res) => {
         user.save().then(() => res.json("Successfully parsed and added to db"));
 
     } catch (error) {
+        if(error.response) {
+            console.log(error.response.data);
+            return res.status(error.response.status).json({err: error.response.data});
+        }
         return res.status(500).json({ err: error.message })
     }
 })
