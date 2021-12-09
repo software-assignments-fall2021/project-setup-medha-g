@@ -27,22 +27,22 @@ const Footer = () => {
                             <p>SubTrackt is a Web Application that allows users to keep track of their subscriptions. Subscriptions are either populated via credit card transaction history or via manual entering. Users also have the opportunity to cancel and add subscriptions that they are interested in through SubTrackt and they can evaluate exactly where each of their money is going.</p>
                         </div>
                         <div className="col item social">
-                            <a href="https://www.facebook.com/" target="_blank">
+                            <a href="https://www.facebook.com/">
                                 <i className="icon ion-social-facebook">
                                     <img src={facebook} height="20px" alt="" />
                                 </i>
                             </a>
-                            <a href="https://twitter.com/home" target="_blank">
+                            <a href="https://twitter.com/home">
                                 <i className="icon ion-social-twitter">
                                     <img src={twitter} height="20px" alt="" />
                                 </i>
                             </a>
-                            <a href="https://www.linkedin.com/feed/" target="_blank">
+                            <a href="https://www.linkedin.com/feed/">
                                 <i className="icon ion-social-snapchat">
                                     <img src={linkedin} height="20px" alt="" />
                                 </i>
                             </a>
-                            <a href="https://www.instagram.com/" target="_blank">
+                            <a href="https://www.instagram.com/">
                                 <i className="icon ion-social-instagram">
                                     <img src={instagram} height="20px" alt="" />
                                 </i>
