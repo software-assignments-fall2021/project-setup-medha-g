@@ -136,13 +136,14 @@ describe('Server', function () {
                         })
                 })
         })
+
         it('should register user and add subscription information', function (done) {
             request(app)
                 .post('/api/users/register') //registers user
                 .send({
                     user: {
-                        username: randCharOne + randCharTwo + randCharTwo,
-                        password: randCharTwo,
+                        username: '***',
+                        password: '***',
                     },
                 })
                 .expect(200, function (err, res) {
@@ -170,25 +171,77 @@ describe('Server', function () {
                             chai.expect(res.body.sub_info).to.deep.equal(
                                 mock_sub
                             )
-                            done()
+
+                            request(app)
+                                .delete('/api/users/deleteaccount')
+                                .set('Authorization', `Token ${jwt}`)
+                                .send({ user: { username: '***' } })
+                                .expect(200, function (err, res) {
+                                    if (err) done(err)
+
+                                    done()
+                                })
                         })
                 })
         })
         it('should remove subscription information', function (done) {
-            let jwt = jwt_global
             request(app)
-                .post('/api/users/removesubscriptioninfo') //removes subscription information
-                .set('Authorization', `Token ${jwt}`)
+                .post('/api/users/register') //registers user
                 .send({
-                    body: { sub_info: randCharThree },
-                    payload: { _id: jwt },
+                    user: {
+                        username: '***',
+                        password: '***',
+                    },
                 })
                 .expect(200, function (err, res) {
-                    if (err) done(err)
-                    chai.expect(res.body.message).to.equal(
-                        'Deleted subscription'
-                    )
-                    done()
+                    let jwt = res.body.user.token
+                    jwt_global = res.body.user.token
+
+                    mock_sub = {
+                        image: randCharThree,
+                        title: randCharThree,
+                        description: randCharThree,
+                        tags: [randCharThree],
+                        plan: {
+                            price: randNum,
+                            time_quantity: randNum,
+                            time_unit: randCharThree,
+                        },
+                    }
+
+                    request(app)
+                        .post('/api/users/addsubscriptioninfo') //adds subscription information
+                        .set('Authorization', `Token ${jwt}`)
+                        .send({ sub_info: mock_sub, payload: { _id: jwt } })
+                        .expect(200, function (err, res) {
+                            if (err) done(err)
+                            chai.expect(res.body.sub_info).to.deep.equal(
+                                mock_sub
+                            )
+
+                            request(app)
+                                .post('/api/users/removesubscriptioninfo') //removes subscription information
+                                .set('Authorization', `Token ${jwt}`)
+                                .send({
+                                    body: { sub_info: randCharThree },
+                                    payload: { _id: jwt },
+                                })
+                                .expect(200, function (err, res) {
+                                    if (err) done(err)
+                                    chai.expect(res.body.message).to.equal(
+                                        'Deleted subscription'
+                                    )
+                                    request(app)
+                                        .delete('/api/users/deleteaccount')
+                                        .set('Authorization', `Token ${jwt}`)
+                                        .send({ user: { username: '***' } })
+                                        .expect(200, function (err, res) {
+                                            if (err) done(err)
+
+                                            done()
+                                        })
+                                })
+                        })
                 })
         })
     })
@@ -213,8 +266,7 @@ describe('Server', function () {
                         .get('/api/plaid/create_link_token') //creates link token
                         .set('Authorization', `Token ${jwt}`)
                         .send({
-                            username:
-                                "***",
+                            username: '***',
                         })
                         .expect(200, function (err, res) {
                             expect(Object.keys(res.body)).to.include(
