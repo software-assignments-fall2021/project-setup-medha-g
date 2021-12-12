@@ -59,6 +59,8 @@ const LogInPage = (props) => {
                     <p className="signup_login_link">Don't have an account? <button className="button-link" onClick={props.handleChange}>Sign up</button></p><br/><br/>
                 </form>
             </div>
+            <br />
+            <br />
             <Footer/>
             {auth.errMessage ? <div>{auth.errMessage}</div> : null}
         </div>

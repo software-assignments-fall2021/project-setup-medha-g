@@ -10,10 +10,10 @@ const Statistics = (props) => {
 
       for (let sub of props.sublist) {
           subcount += 1;
-          if (sub.plan.time_unit === "month(s)"){
+          if (sub.plan.time_unit === "month"){
             money_per_day += sub.plan.price/(sub.plan.time_quantity*30);
             }
-            else if (sub.plan.time_unit === "year(s)"){
+            else if (sub.plan.time_unit === "year"){
                 money_per_day += sub.plan.price/(sub.plan.time_quantity*365);
             }   
             else{
