@@ -10,7 +10,6 @@ import { ProvideVeil } from "./use-veil";
 import Veil from "./Veil";
 import TeamPage from "./TeamPage";
 import FAQPage from "./FAQPage.jsx";
-import Sub from "./SubscriptionList";
 
 function App() {
 	return (

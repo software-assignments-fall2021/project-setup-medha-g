@@ -5,7 +5,6 @@ const BubbleChart = (props) => {
     const [data, setData] = useState([['Subscription', 'Plan', 'Cost']]);
 
     useEffect(() => {
-      let map = {};
       let money_per_day = 0;
       let count = 1;
       let curr = [['Subscription', 'Plan', 'Cost']]
