@@ -50,12 +50,16 @@ function useSubList(initList) {
         });
     }
 
+
+    
     // const categoriesSubList = sub =>{ //TO DO: use categories to map a frequency list and create graphs
     //     sub.map(sub => (key=sub.industry));
     // }
 
     // console.log("sublist: ",sublist[0]);
     console.log("sub: ", sublist);
+
+    
 
     return [sublist, addSublist, deleteSublist, setSublist];
 }
@@ -72,10 +76,12 @@ const SubscriptionList = () => {
      *  tags: tags of the subscription
      * }
      */
+    
     const [sublist, addList, deleteList, setList] = useSubList([]);
     const [seePage, toggleSeePage] = useState(false);
     const auth = useAuth();
     const forceRender = useRender();
+
 
     const getDBList = useCallback(async () => {
         console.log("Getting list from db");

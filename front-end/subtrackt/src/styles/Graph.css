@@ -2,7 +2,6 @@
   box-sizing: border-box;
 }
 
-/* Float four columns side by side */
 .column {
   float: left;
   width: 33.33%;
@@ -19,23 +18,24 @@
   clear: both;
 }
 
-/* Style the counter cards */
 .card {
-  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2); /* this adds the "card" effect */
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2); 
   padding: 16px;
   text-align: center;
-  background-color: #b4896c;
+  background: linear-gradient(180deg, #98ccb3, #d6ab8e);
   margin-top: 25px;
+  border-radius: 10px;
+
 }
 
+
 .card h4{
-  color: white;
+  font-size: 2.6rem;
 }
 .card p{
   color: white;
 }
 
-/* Responsive columns - one column layout (vertical) on small screens */
 @media screen and (max-width: 600px) {
   .column {
     width: 100%;

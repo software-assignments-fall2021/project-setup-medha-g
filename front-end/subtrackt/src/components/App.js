@@ -23,7 +23,6 @@ function App() {
 							<Switch>
 								<Route path='/landing'>
 									<LandingPage />
-									{/* <Sub/> */}
 								</Route>
 
 								<Route path='/team'>

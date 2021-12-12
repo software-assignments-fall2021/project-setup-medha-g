@@ -2,25 +2,27 @@ import React, { useEffect, useState } from "react";
 import "../styles/Graph.css";
 
 const Statistics = (props) => {
-    //TODO: use backend data
-    const [data, setData] = useState([["Industry", "Count"]]);
+    const [data, setData] = useState([]);
   
     useEffect(() => {
-      let map = {};
+      let subcount = 0;
+      let money_per_day = 0;
+
       for (let sub of props.sublist) {
-        for (let tag of sub.tags) {
-          if(tag in map) {
-            map[tag] += 1;
-          } else {
-            map[tag] = 1;
-          }
-        }
+          subcount += 1;
+          if (sub.plan.time_unit === "month(s)"){
+            money_per_day += sub.plan.price/sub.plan.time_quantity*30;
+            }
+            else if (sub.plan.time_unit === "year(s)"){
+                money_per_day += sub.plan.price/sub.plan.time_quantity*365;
+            }   
+            else{
+                money_per_day += sub.plan.price/sub.plan.time_quantity;
+            }
+        
       }
   
-      let curr = [["Tags", "Count"]]
-      for (let tag in map) {
-        curr.push([tag, map[tag]]);
-      }
+      let curr = [parseFloat(money_per_day/365).toFixed(2), subcount, parseFloat(money_per_day/30).toFixed(2)];
       setData(curr);
     }, [props, setData])
   
@@ -29,19 +31,19 @@ const Statistics = (props) => {
         <div className="row">
         <div className="column">
           <div className="card">
-              <h4><b>$20</b></h4>
-              <p>Spent This Month</p>
+              <h4><b>${data[0]}</b></h4>
+              <p>Average Yearly Spending</p>
           </div>
         </div>
         <div className="column">
           <div className="card">
-              <h4><b>20</b></h4>
-              <p>Subscriptions</p>
+              <h4><b>{data[1]}</b></h4>
+              <p>Total Subscriptions</p>
           </div>
         </div>
         <div className="column">
           <div className="card">
-              <h4><b>$20</b></h4>
+              <h4><b>${data[2]}</b></h4>
               <p>Average Monthly Spending</p>
           </div>
         </div>
