@@ -55,6 +55,8 @@ function useSubList(initList) {
     // }
 
     // console.log("sublist: ",sublist[0]);
+    console.log("sub: ", sublist);
+
     return [sublist, addSublist, deleteSublist, setSublist];
 }
 
@@ -154,7 +156,7 @@ const SubscriptionList = () => {
     return (
         <div>
             <div className="SubscriptionBox">
-                <br></br><br></br><br></br>
+                <br></br><br></br><br></br><br/><br/>
                 <h3>Your Subscriptions</h3>
                 <button className="custom-button" onClick={handleSeePage} id="addButton">+</button>
                 {seePage ? <SubcriptionAddPage handleSubmit={handleAddSub} handleBack={handleUnseePage} handleRender={forceRender} /> : null}

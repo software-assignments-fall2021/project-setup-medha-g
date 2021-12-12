@@ -22,8 +22,8 @@ function App() {
 							<Header />
 							<Switch>
 								<Route path='/landing'>
-									{/* <LandingPage /> */}
-									<Sub/>
+									<LandingPage />
+									{/* <Sub/> */}
 								</Route>
 
 								<Route path='/team'>
