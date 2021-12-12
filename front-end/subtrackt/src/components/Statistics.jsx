@@ -11,10 +11,10 @@ const Statistics = (props) => {
       for (let sub of props.sublist) {
           subcount += 1;
           if (sub.plan.time_unit === "month(s)"){
-            money_per_day += sub.plan.price/sub.plan.time_quantity*30;
+            money_per_day += sub.plan.price/(sub.plan.time_quantity*30);
             }
             else if (sub.plan.time_unit === "year(s)"){
-                money_per_day += sub.plan.price/sub.plan.time_quantity*365;
+                money_per_day += sub.plan.price/(sub.plan.time_quantity*365);
             }   
             else{
                 money_per_day += sub.plan.price/sub.plan.time_quantity;
@@ -22,7 +22,7 @@ const Statistics = (props) => {
         
       }
   
-      let curr = [parseFloat(money_per_day/365).toFixed(2), subcount, parseFloat(money_per_day/30).toFixed(2)];
+      let curr = [parseFloat(money_per_day * 365).toFixed(2), subcount, parseFloat(money_per_day * 30).toFixed(2)];
       setData(curr);
     }, [props, setData])
   
