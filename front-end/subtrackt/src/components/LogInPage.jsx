@@ -36,6 +36,7 @@ const LogInPage = (props) => {
                             onChange={handleUsername}
                             placeholder="Username"
                         />
+                        <small className="form-text text-muted">Username must be at least 5 letters long</small>
                     </div>
                     <br />
                     <div className="mb-3">
@@ -46,6 +47,8 @@ const LogInPage = (props) => {
                             onChange={handlePassword}
                             placeholder="Password"
                         />
+                        <small className="form-text text-muted">Password must be at least 8 letters long</small>
+                        <br />
                         Show Password: <input type="checkbox" onClick={showpass.trigger} />
                     </div>
                     <br />

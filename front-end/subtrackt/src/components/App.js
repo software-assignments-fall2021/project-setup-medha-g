@@ -2,7 +2,7 @@ import React from "react";
 import "../styles/App.css";
 import LandingPage from "./LandingPage";
 import Header from "./Header";
-import { Route, Switch, BrowserRouter as Router } from "react-router-dom";
+import { Route, Switch, HashRouter as Router } from "react-router-dom";
 import { ProvideAuth } from "./use-auth";
 import ProtectPage from "./ProtectPage";
 import { Redirect } from "react-router";
