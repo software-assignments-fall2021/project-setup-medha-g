@@ -132,13 +132,6 @@ describe('Server', function () {
                         .expect(200, function (err, res) {
                             if (err) done(err)
 
-                    request(app)
-                        .post('/api/users/addsubscriptioninfo') //adds subscription information
-                        .set('Authorization', `Token ${jwt}`)
-                        .send({ sub_info: mock_sub, payload: { _id: jwt } })
-                        .expect(200, function (err, res) {
-                            if (err) done(err)
-                            chai.expect(res.body.sub_info).to.deep.equal(mock_sub)
                             done()
                         })
                 })
@@ -252,7 +245,6 @@ describe('Server', function () {
                 })
         })
     })
-
     describe('Plaid API', function () {
         var jwt = null
 
@@ -355,5 +347,4 @@ describe('Server', function () {
     //             })
     //         })
     // })
-    })
 })
