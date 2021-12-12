@@ -8,7 +8,7 @@ const Header = () => {
     return (
         <div className="navbar">
             <Link className="column" to="/landing">
-            <img alt="Qries" src={require('../images/logo.png')} width="15%"></img></Link>
+            <img alt="Qries" src={require('../images/logo.png')} width="4.5%"></img></Link>
             <Link className="column login-text" to="/sub_list">{ auth.user ? "Subscription List" : "Log In/Sign Up"}</Link>
 
             <LogoutPage />
