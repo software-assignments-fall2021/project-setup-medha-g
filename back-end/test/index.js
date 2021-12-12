@@ -252,6 +252,7 @@ describe('Server', function () {
                 })
         })
     })
+
     describe('Plaid API', function () {
         var jwt = null
 
@@ -354,6 +355,5 @@ describe('Server', function () {
     //             })
     //         })
     // })
+    })
 })
-
-
