@@ -62,7 +62,6 @@ const BubbleChart = (props) => {
             easing: 'out',
             startup: true,
           },
-          colors: ['#C0E0DE', '#98ccb3', '#F5F58C','#e8e8b7','#d2eb98','#b2eb98','#98ebac','#98ebd2','#95e0ed'],
 
           
       }
