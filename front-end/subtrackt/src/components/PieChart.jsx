@@ -33,9 +33,18 @@ const PieGraph = (props) => {
       loader={<div>Loading Chart</div>}
       data={data}
       options={{
-        title: "Subscription tag distribution",
-        backgroundColor: '#f2fff9'
-      }}
+        title: "Your Subscriptions By Industry",
+        titleTextStyle: {color: "#b4896c"},
+        backgroundColor: '#f2fff9',
+        animation: {
+          startup: true,
+          easing: 'linear',
+          duration: 1500,
+        },
+        colors: ['#C0E0DE', '#98ccb3', '#F5F58C','#e8e8b7','#d2eb98','#b2eb98','#98ebac','#98ebd2','#95e0ed']
+      }
+      
+    }
       />)
 };
 

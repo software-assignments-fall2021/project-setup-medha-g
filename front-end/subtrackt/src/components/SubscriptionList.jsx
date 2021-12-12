@@ -50,11 +50,17 @@ function useSubList(initList) {
         });
     }
 
+
+    
     // const categoriesSubList = sub =>{ //TO DO: use categories to map a frequency list and create graphs
     //     sub.map(sub => (key=sub.industry));
     // }
 
     // console.log("sublist: ",sublist[0]);
+    console.log("sub: ", sublist);
+
+    
+
     return [sublist, addSublist, deleteSublist, setSublist];
 }
 
@@ -70,10 +76,12 @@ const SubscriptionList = () => {
      *  tags: tags of the subscription
      * }
      */
+    
     const [sublist, addList, deleteList, setList] = useSubList([]);
     const [seePage, toggleSeePage] = useState(false);
     const auth = useAuth();
     const forceRender = useRender();
+
 
     const getDBList = useCallback(async () => {
         console.log("Getting list from db");
@@ -154,7 +162,7 @@ const SubscriptionList = () => {
     return (
         <div>
             <div className="SubscriptionBox">
-                <br></br><br></br><br></br>
+                <br></br><br></br><br></br><br/><br/>
                 <h3>Your Subscriptions</h3>
                 <button className="custom-button" onClick={handleSeePage} id="addButton">+</button>
                 {seePage ? <SubcriptionAddPage handleSubmit={handleAddSub} handleBack={handleUnseePage} handleRender={forceRender} /> : null}
