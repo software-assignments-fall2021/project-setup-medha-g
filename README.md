@@ -1,6 +1,6 @@
 # Project Repository
 
-url to project: http://167.172.149.209/#/landing
+url to project: http://137.184.150.242:4090/client/#/landing
 
 This repository will be used for team projects.
 
