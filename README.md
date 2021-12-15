@@ -1,6 +1,7 @@
 # Project Repository
 
 url to project: http://137.184.150.242:4090/client/#/landing
+youtube link to presentation: https://youtu.be/hh47cnpJIhQ
 
 This repository will be used for team projects.
 
